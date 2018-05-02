@@ -1,6 +1,6 @@
 <script>
-	import { getCellSize } from './utils.js';
 	import Ship from './ship.vue';
+	import { toPx } from './utils.js';
 
 	export default {
 		components: {
@@ -23,17 +23,22 @@
 			moveShip: {
 				type: Function,
 				default: () => {}
+			},
+			cellSize: {
+				type: Number,
+				default: 0
 			}
 		},
 
 		computed: {
-			cellSize() {
-				return getCellSize( this.size );
-			},
-
 			dimension() {
 				return this.size * this.cellSize;
 			}
+		},
+
+		mounted() {
+			this.$watch( 'cellSize', () => ( this.$el.style.backgroundSize = toPx( this.cellSize ) ) );
+			this.$el.style.backgroundSize = toPx( this.cellSize );
 		}
 	};
 </script>

@@ -1,21 +1,30 @@
 <template>
-	<div>
-		<PlayerBattlefield
-			:size="size"
-			:ships="player.ships"
-			:rotate-ship="rotateShip"
-			:move-ship="moveShip" />
+	<div class="battleships">
+		<div
+			:style="{ width }"
+			class="battleships__fields">
 
-		<OpponentBattlefield
-			:size="size"
-			:ships="opponent.ships"
-			:shoot="shoot" />
+			<PlayerBattlefield
+				:size="parent.size"
+				:ships="parent.player.ships"
+				:rotate-ship="parent.player.rotateShip"
+				:move-ship="parent.player.moveShip"
+				:cell-size="cellSize"/>
+
+			<OpponentBattlefield
+				:size="parent.size"
+				:ships="parent.opponent.ships"
+				:shoot="parent.opponent.shoot"
+				:cell-size="cellSize"/>
+
+		</div>
 	</div>
 </template>
 
 <script>
 	import PlayerBattlefield from './playerbattlefield.vue';
 	import OpponentBattlefield from './opponentbattlefield.vue';
+	import { getCellSize, toPx } from './utils.js';
 
 	export default {
 		components: {
@@ -23,30 +32,28 @@
 			OpponentBattlefield
 		},
 
+		data() {
+			return {
+				clientWidth: document.body.clientWidth
+			};
+		},
+
 		computed: {
-			size() {
-				return this.$parent.size;
+			parent() {
+				return this.$parent;
 			},
 
-			player() {
-				return this.$parent.player;
+			cellSize() {
+				return getCellSize( this.parent.size, this.clientWidth );
 			},
 
-			opponent() {
-				return this.$parent.opponent;
-			},
-
-			rotateShip() {
-				return this.player.rotateShip;
-			},
-
-			moveShip() {
-				return this.player.moveShip;
-			},
-
-			shoot() {
-				return this.opponent.shoot;
+			width() {
+				return toPx( ( this.cellSize * this.parent.size ) * 2 + this.cellSize );
 			}
+		},
+
+		mounted() {
+			window.addEventListener( 'resize', () => ( this.clientWidth = document.body.clientWidth ) );
 		}
 	};
 </script>
