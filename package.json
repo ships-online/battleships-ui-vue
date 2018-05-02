@@ -17,15 +17,15 @@
   },
   "author": "Oskar Wróbel <kontakt@oskarwrobel.pl>",
   "license": "ISC",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "battleships-dev-tools": "https://github.com/ships-online/battleships-dev-tools.git",
     "eslint": "^4.10.0",
     "eslint-config-ckeditor5": "^1.0.6",
     "gulp": "^3.9.1",
     "husky": "^0.14.3",
-    "lint-staged": "^4.3.0"
+    "lint-staged": "^4.3.0",
+    "vue": "^2.5.16"
   },
   "lint-staged": {
     "**/*.js": [
