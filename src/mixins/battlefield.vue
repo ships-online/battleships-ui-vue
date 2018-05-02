@@ -1,7 +1,7 @@
 <script>
-	import Ship from './ship.vue';
-	import Field from './field.vue';
-	import { toPx } from './utils.js';
+	import Ship from '../ship.vue';
+	import Field from '../field.vue';
+	import { toPx } from '../utils.js';
 
 	export default {
 		components: {

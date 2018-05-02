@@ -22,8 +22,8 @@
 </template>
 
 <script>
-	import Battlefield from './battlefield.vue';
-	import Shootable from './shootable.vue';
+	import Battlefield from './mixins/battlefield.vue';
+	import Shootable from './mixins/shootable.vue';
 	import Aim from './aim.vue';
 
 	export default {

@@ -18,8 +18,8 @@
 </template>
 
 <script>
-	import Battlefield from './battlefield.vue';
-	import Moveable from './moveable.vue';
+	import Battlefield from './mixins/battlefield.vue';
+	import Moveable from './mixins/moveable.vue';
 
 	export default {
 		mixins: [ Battlefield, Moveable ]
