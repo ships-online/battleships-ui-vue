@@ -8,7 +8,8 @@
 
 		<OpponentBattlefield
 			:size="size"
-			:ships="opponent.ships" />
+			:ships="opponent.ships"
+			:shoot="shoot" />
 	</div>
 </template>
 
@@ -41,6 +42,10 @@
 
 			moveShip() {
 				return this.player.moveShip;
+			},
+
+			shoot() {
+				return this.opponent.shoot;
 			}
 		}
 	};

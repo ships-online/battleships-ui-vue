@@ -11,7 +11,8 @@
 			:size="cellSize"
 			:x="aimX"
 			:y="aimY"
-			:show="isAimVisible"/>
+			:show="isAimVisible"
+			:shoot="shoot"/>
 	</div>
 </template>
 
@@ -25,6 +26,13 @@
 			Aim
 		},
 
-		mixins: [ Battlefield, Shootable ]
+		mixins: [ Battlefield, Shootable ],
+
+		props: {
+			shoot: {
+				type: Function,
+				default: () => {}
+			}
+		}
 	};
 </script>
