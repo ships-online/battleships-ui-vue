@@ -5,3 +5,16 @@ export function getCellSize( size, clientWidth ) {
 export function toPx( value ) {
 	return `${ value }px`;
 }
+
+export function collectionToArray( collection ) {
+	const result = Array.from( collection );
+
+	collection.on( 'add', ( evt, item ) => result.push( item ) );
+	collection.on( 'remove', ( evt, item ) => {
+		if ( result.includes( item ) ) {
+			result.splice( result.indexOf( item ), 1 );
+		}
+	} );
+
+	return result;
+}

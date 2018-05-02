@@ -2,6 +2,11 @@
 	<div
 		:style="{ width: dimension + 'px', height: dimension + 'px' }"
 		class="battleships__field battleships__field_battlefield">
+		<Field
+			v-for="field of markers"
+			:key="field.id"
+			:model="field"
+			:cell-size="cellSize"/>
 		<Ship
 			v-for="ship of ships"
 			:key="ship.id"

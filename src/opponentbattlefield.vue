@@ -7,6 +7,11 @@
 			:key="ship.id"
 			:model="ship"
 			:cell-size="cellSize"/>
+		<Field
+			v-for="field of markers"
+			:key="field.id"
+			:model="field"
+			:cell-size="cellSize"/>
 		<Aim
 			:size="cellSize"
 			:x="aimX"

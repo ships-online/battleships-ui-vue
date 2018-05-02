@@ -1,10 +1,12 @@
 <script>
 	import Ship from './ship.vue';
+	import Field from './field.vue';
 	import { toPx } from './utils.js';
 
 	export default {
 		components: {
-			Ship
+			Ship,
+			Field
 		},
 
 		props: {
@@ -13,6 +15,10 @@
 				default: 0
 			},
 			ships: {
+				type: Array,
+				default: () => []
+			},
+			fields: {
 				type: Array,
 				default: () => []
 			},
@@ -33,6 +39,10 @@
 		computed: {
 			dimension() {
 				return this.size * this.cellSize;
+			},
+
+			markers() {
+				return this.fields.filter( field => field.isMissed || field.isHit );
 			}
 		},
 

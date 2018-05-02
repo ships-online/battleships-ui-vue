@@ -7,6 +7,7 @@
 			<PlayerBattlefield
 				:size="parent.size"
 				:ships="parent.player.ships"
+				:fields="parent.player.fields"
 				:rotate-ship="parent.player.rotateShip"
 				:move-ship="parent.player.moveShip"
 				:cell-size="cellSize"/>
@@ -14,6 +15,7 @@
 			<OpponentBattlefield
 				:size="parent.size"
 				:ships="parent.opponent.ships"
+				:fields="parent.opponent.fields"
 				:shoot="parent.opponent.shoot"
 				:cell-size="cellSize"/>
 
