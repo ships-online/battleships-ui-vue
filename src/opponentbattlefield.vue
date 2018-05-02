@@ -6,17 +6,25 @@
 			v-for="ship of ships"
 			:key="ship.id"
 			:model="ship"
-			:cell-size="cellSize"
-			@dblclick="rotate( ship )"
-			@move="pos => move( pos, ship )"/>
+			:cell-size="cellSize"/>
+		<Aim
+			:size="cellSize"
+			:x="aimX"
+			:y="aimY"
+			:show="isAimVisible"/>
 	</div>
 </template>
 
 <script>
 	import Battlefield from './battlefield.vue';
-	import Moveable from './moveable.vue';
+	import Shootable from './shootable.vue';
+	import Aim from './aim.vue';
 
 	export default {
-		mixins: [ Battlefield, Moveable ]
+		components: {
+			Aim
+		},
+
+		mixins: [ Battlefield, Shootable ]
 	};
 </script>

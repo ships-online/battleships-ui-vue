@@ -1,7 +1,7 @@
 <template>
 	<div
 		:class="[ 'ship', isCollisionClass ]"
-		:style="{ top, left, width: width, height }"/>
+		:style="{ top, left, width, height }"/>
 </template>
 
 <script>

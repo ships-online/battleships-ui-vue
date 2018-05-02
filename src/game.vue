@@ -1,17 +1,25 @@
 <template>
-	<Battlefield
-		:size="size"
-		:ships="player.ships"
-		:rotate-ship="rotateShip"
-		:move-ship="moveShip" />
+	<div>
+		<PlayerBattlefield
+			:size="size"
+			:ships="player.ships"
+			:rotate-ship="rotateShip"
+			:move-ship="moveShip" />
+
+		<OpponentBattlefield
+			:size="size"
+			:ships="opponent.ships" />
+	</div>
 </template>
 
 <script>
-	import Battlefield from './playerbattlefield.vue';
+	import PlayerBattlefield from './playerbattlefield.vue';
+	import OpponentBattlefield from './opponentbattlefield.vue';
 
 	export default {
 		components: {
-			Battlefield
+			PlayerBattlefield,
+			OpponentBattlefield
 		},
 
 		computed: {
@@ -23,12 +31,16 @@
 				return this.$parent.player;
 			},
 
+			opponent() {
+				return this.$parent.opponent;
+			},
+
 			rotateShip() {
-				return this.$parent.player.rotateShip;
+				return this.player.rotateShip;
 			},
 
 			moveShip() {
-				return this.$parent.player.moveShip;
+				return this.player.moveShip;
 			}
 		}
 	};
