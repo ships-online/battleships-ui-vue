@@ -4,7 +4,7 @@
   "description": "The Vue version of Battleships game.",
   "scripts": {
     "test": "battleships-test",
-    "lint": "eslint --quiet '**/*.js'",
+    "lint": "eslint --quiet **/*.js **/*.vue",
     "precommit": "lint-staged"
   },
   "keywords": [
@@ -22,15 +22,15 @@
     "battleships-dev-tools": "https://github.com/ships-online/battleships-dev-tools.git",
     "eslint": "^4.10.0",
     "eslint-config-ckeditor5": "^1.0.6",
+    "eslint-plugin-vue": "^4.5.0",
     "gulp": "^3.9.1",
     "husky": "^0.14.3",
     "lint-staged": "^4.3.0",
     "vue": "^2.5.16"
   },
   "lint-staged": {
-    "**/*.js": [
-      "eslint --quiet"
-    ]
+    "**/*.js": "eslint --quiet",
+    "**/*.vue": "eslint --quiet"
   },
   "eslintIgnore": [
     "coverage/**"

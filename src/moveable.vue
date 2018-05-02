@@ -22,8 +22,8 @@
 			},
 
 			rotate( ship ) {
-			    this.rotateShip( ship );
+				this.rotateShip( ship );
 			}
 		}
-	}
+	};
 </script>

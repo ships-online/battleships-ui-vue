@@ -1,5 +1,7 @@
 <template>
-	<div :class="[ 'ship', isCollisionClass ]" :style="{ top, left, width: width, height }"></div>
+	<div
+		:class="[ 'ship', isCollisionClass ]"
+		:style="{ top, left, width: width, height }"/>
 </template>
 
 <script>
@@ -9,44 +11,25 @@
 	export default {
 		props: {
 			model: {
-				type: Ship
+				type: Ship,
+				default: {}
 			},
-			cellSize: Number
+			cellSize: {
+				type: Number,
+				default: 0
+			}
 		},
 
 		data() {
 			return {
 				isDrag: false,
 				dragHandlerRef: null
-			}
-		},
-
-		mounted() {
-			let cursorPaddingX, cursorPaddingY;
-
-			this.dragHandlerRef = evt => {
-				this.$emit( 'move', {
-				    x: evt.clientX - cursorPaddingX,
-				    y: evt.clientY - cursorPaddingY
-				} );
 			};
-
-			this.$el.addEventListener( 'dblclick', () => this.$emit( 'dblclick' ) );
-			this.$el.addEventListener( 'mousedown', evt => {
-				const shipElBounds = evt.target.getBoundingClientRect();
-
-				cursorPaddingX = evt.clientX - shipElBounds.left;
-				cursorPaddingY = evt.clientY - shipElBounds.top;
-
-				evt.preventDefault();
-				document.addEventListener( 'mousemove', this.dragHandlerRef );
-			} );
-			document.addEventListener( 'mouseup', () => document.removeEventListener( 'mousemove', this.dragHandlerRef ) );
 		},
 
 		computed: {
 			isCollisionClass() {
-			    return this.model.isCollision ? 'ship-collision' : '';
+				return this.model.isCollision ? 'ship-collision' : '';
 			},
 
 			left() {
@@ -64,6 +47,29 @@
 			height() {
 				return toPx( ( this.model.isRotated ? this.model.length : 1 ) * this.cellSize );
 			}
+		},
+
+		mounted() {
+			let cursorPaddingX, cursorPaddingY;
+
+			this.dragHandlerRef = evt => {
+				this.$emit( 'move', {
+					x: evt.clientX - cursorPaddingX,
+					y: evt.clientY - cursorPaddingY
+				} );
+			};
+
+			this.$el.addEventListener( 'dblclick', () => this.$emit( 'dblclick' ) );
+			this.$el.addEventListener( 'mousedown', evt => {
+				const shipElBounds = evt.target.getBoundingClientRect();
+
+				cursorPaddingX = evt.clientX - shipElBounds.left;
+				cursorPaddingY = evt.clientY - shipElBounds.top;
+
+				evt.preventDefault();
+				document.addEventListener( 'mousemove', this.dragHandlerRef );
+			} );
+			document.addEventListener( 'mouseup', () => document.removeEventListener( 'mousemove', this.dragHandlerRef ) );
 		}
-	}
+	};
 </script>

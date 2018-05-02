@@ -1,5 +1,9 @@
 <template>
-	<Battlefield :size="size" :ships="player.ships" :rotateShip="rotateShip" :moveShip="moveShip" />
+	<Battlefield
+		:size="size"
+		:ships="player.ships"
+		:rotate-ship="rotateShip"
+		:move-ship="moveShip" />
 </template>
 
 <script>
@@ -27,5 +31,5 @@
 				return this.$parent.player.moveShip;
 			}
 		}
-	}
+	};
 </script>
