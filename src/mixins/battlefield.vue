@@ -14,6 +14,10 @@
 				type: Number,
 				default: 0
 			},
+			cellSize: {
+				type: Number,
+				default: 0
+			},
 			ships: {
 				type: Array,
 				default: () => []
@@ -29,10 +33,6 @@
 			moveShip: {
 				type: Function,
 				default: () => {}
-			},
-			cellSize: {
-				type: Number,
-				default: 0
 			}
 		},
 

@@ -2,7 +2,7 @@
 	<div class="battleships">
 		<div
 			:style="{ width }"
-			class="battleships__fields">
+			class="fields-container">
 
 			<PlayerBattlefield
 				:size="parent.size"
