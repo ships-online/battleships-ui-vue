@@ -5,20 +5,20 @@
 			class="fields-container">
 
 			<PlayerBattlefield
-				:size="parent.size"
-				:ships="parent.player.ships"
-				:fields="parent.player.fields"
-				:rotate-ship="parent.player.rotateShip"
-				:move-ship="parent.player.moveShip"
-				:cell-size="cellSize"/>
+				:size="size"
+				:cell-size="cellSize"
+				:ships="playerShips"
+				:fields="playerFields"
+				:rotate-ship="rotateShip"
+				:move-ship="moveShip"/>
 
 			<OpponentBattlefield
-				:size="parent.size"
-				:ships="parent.opponent.ships"
-				:fields="parent.opponent.fields"
-				:shoot="parent.opponent.shoot"
-				:cell-size="cellSize"/>
-
+				v-if="game.opponent.isReady"
+				:size="size"
+				:cell-size="cellSize"
+				:ships="opponentShips"
+				:fields="opponentFields"
+				:shoot="shoot"/>
 		</div>
 	</div>
 </template>
@@ -26,7 +26,7 @@
 <script>
 	import PlayerBattlefield from './playerbattlefield.vue';
 	import OpponentBattlefield from './opponentbattlefield.vue';
-	import { getCellSize, toPx } from './utils.js';
+	import { getCellSize, toPx, collectionToArray } from './utils.js';
 
 	export default {
 		components: {
@@ -35,27 +35,45 @@
 		},
 
 		data() {
+			const game = this.$parent.game;
+
 			return {
-				clientWidth: document.body.clientWidth
+				clientWidth: document.body.clientWidth,
+				playerShips: collectionToArray( game.player.battlefield.shipsCollection ),
+				playerFields: collectionToArray( game.player.battlefield ),
+				opponentShips: collectionToArray( game.opponent.battlefield.shipsCollection ),
+				opponentFields: collectionToArray( game.opponent.battlefield ),
+				size: game.player.battlefield.size,
+				game
 			};
 		},
 
 		computed: {
-			parent() {
-				return this.$parent;
-			},
-
 			cellSize() {
-				return getCellSize( this.parent.size, this.clientWidth );
+				return getCellSize( this.size, this.clientWidth );
 			},
 
 			width() {
-				return toPx( ( this.cellSize * this.parent.size ) * 2 + this.cellSize );
+				return toPx( ( this.cellSize * this.size ) * 2 + this.cellSize );
 			}
 		},
 
 		mounted() {
 			window.addEventListener( 'resize', () => ( this.clientWidth = document.body.clientWidth ) );
+		},
+
+		methods: {
+			moveShip( ship, position ) {
+				this.game.player.battlefield.moveShip( ship, position );
+			},
+
+			rotateShip( ship ) {
+				this.game.player.battlefield.rotateShip( ship );
+			},
+
+			shoot( position ) {
+				this.game.opponent.battlefield.shoot( position );
+			}
 		}
 	};
 </script>
