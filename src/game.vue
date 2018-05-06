@@ -19,6 +19,14 @@
 				:ships="opponentShips"
 				:fields="opponentFields"
 				:shoot="shoot"/>
+
+			<InviteField
+				v-if="!game.opponent.isReady"
+				:size="size"
+				:cell-size="cellSize"
+				:invite-url="game.inviteUrl"
+				:interested-players-number="game.interestedPlayersNumber"
+				:is-host="game.player.isHost"/>
 		</div>
 	</div>
 </template>
@@ -26,12 +34,14 @@
 <script>
 	import PlayerBattlefield from './playerbattlefield.vue';
 	import OpponentBattlefield from './opponentbattlefield.vue';
+	import InviteField from './invitefield.vue';
 	import { getCellSize, toPx, collectionToArray } from './utils.js';
 
 	export default {
 		components: {
 			PlayerBattlefield,
-			OpponentBattlefield
+			OpponentBattlefield,
+			InviteField
 		},
 
 		data() {

@@ -1,23 +1,19 @@
 <script>
+	import Player from 'battleships-core/src/player.js';
 	import Ship from '../ship.vue';
-	import Field from '../field.vue';
+	import MarkerField from '../markerfield.vue';
+	import Field from './field.vue';
 	import { toPx } from '../utils.js';
 
 	export default {
 		components: {
 			Ship,
-			Field
+			MarkerField
 		},
 
+		mixins: [ Field ],
+
 		props: {
-			size: {
-				type: Number,
-				default: 0
-			},
-			cellSize: {
-				type: Number,
-				default: 0
-			},
 			ships: {
 				type: Array,
 				default: () => []
@@ -33,16 +29,10 @@
 			moveShip: {
 				type: Function,
 				default: () => {}
-			}
-		},
-
-		computed: {
-			dimension() {
-				return this.size * this.cellSize;
 			},
-
-			markers() {
-				return this.fields.filter( field => field.isMissed || field.isHit );
+			player: {
+				type: Player,
+				default: () => {}
 			}
 		},
 
