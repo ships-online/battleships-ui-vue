@@ -7,7 +7,7 @@
 			:key="ship.id"
 			:model="ship"
 			:cell-size="cellSize"/>
-		<MarkerField
+		<Stamp
 			v-for="field of fields"
 			v-if="field.isMissed || field.isHit"
 			:key="field.id"

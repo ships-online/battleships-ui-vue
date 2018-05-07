@@ -2,7 +2,7 @@
 	<div
 		:style="{ width: dimension + 'px', height: dimension + 'px' }"
 		:class="[ 'field', 'battlefield', inactiveClass ]">
-		<MarkerField
+		<Stamp
 			v-for="field of fields"
 			v-if="field.isMissed || field.isHit"
 			:key="field.id"

@@ -49,14 +49,6 @@
 		mixins: [ Field ],
 
 		props: {
-			inviteUrl: {
-				type: String,
-				default: ''
-			},
-			interestedPlayersNumber: {
-				type: Number,
-				default: 0
-			},
 			player: {
 				type: Player,
 				default: () => {}
@@ -64,6 +56,14 @@
 			opponent: {
 				type: Player,
 				default: () => {}
+			},
+			inviteUrl: {
+				type: String,
+				default: ''
+			},
+			interestedPlayersNumber: {
+				type: Number,
+				default: 0
 			},
 			join: {
 				type: Function,
