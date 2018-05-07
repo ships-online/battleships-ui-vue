@@ -11,7 +11,9 @@
 		<div
 			:style="{ width }"
 			class="fields-container">
+
 			<PlayerBattlefield
+				v-if="game.status !== 'over'"
 				:size="size"
 				:cell-size="cellSize"
 				:is-active="!game.activePlayerId || game.activePlayerId === game.opponent.id"
@@ -19,6 +21,15 @@
 				:fields="playerFields"
 				:rotate-ship="rotateShip"
 				:move-ship="moveShip"/>
+
+			<SummaryField
+				v-if="game.status === 'over'"
+				:size="size"
+				:cell-size="cellSize"
+				:player="game.player"
+				:opponent="game.opponent"
+				:is-winner="game.winnerId === game.player.id"
+				:rematch="rematch"/>
 
 			<OpponentBattlefield
 				v-if="game.opponent.isReady && game.player.isReady"
@@ -39,6 +50,7 @@
 				:opponent="game.opponent"
 				:join="join"
 				:ready="ready"/>
+
 		</div>
 	</div>
 </template>
@@ -47,6 +59,7 @@
 	import PlayerBattlefield from './playerbattlefield.vue';
 	import OpponentBattlefield from './opponentbattlefield.vue';
 	import InviteField from './invitefield.vue';
+	import SummaryField from './summaryfield.vue';
 	import { getCellSize, toPx, collectionToArray } from './utils.js';
 
 	const MARGIN = 20;
@@ -55,7 +68,8 @@
 		components: {
 			PlayerBattlefield,
 			OpponentBattlefield,
-			InviteField
+			InviteField,
+			SummaryField
 		},
 
 		data() {
@@ -109,6 +123,10 @@
 
 			random() {
 				this.game.player.battlefield.random();
+			},
+
+			rematch() {
+				this.game.requestRematch();
 			}
 		}
 	};

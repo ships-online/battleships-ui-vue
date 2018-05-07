@@ -22,7 +22,7 @@
 			Wait until your opponent finish arranging ships.
 		</p>
 
-		<p v-if="opponent.isReady">
+		<p v-if="player.isInGame && opponent.isReady">
 			Your opponent is ready for the battle.
 		</p>
 
@@ -73,6 +73,6 @@
 				type: Function,
 				default: () => {}
 			}
-		},
+		}
 	};
 </script>
