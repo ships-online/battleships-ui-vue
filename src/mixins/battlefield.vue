@@ -40,6 +40,12 @@
 			}
 		},
 
+		computed: {
+			inactiveClass() {
+				return this.isActive ? '' : 'inactive';
+			}
+		},
+
 		mounted() {
 			this.$watch( 'cellSize', () => ( this.$el.style.backgroundSize = toPx( this.cellSize ) ) );
 			this.$el.style.backgroundSize = toPx( this.cellSize );

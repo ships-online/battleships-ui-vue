@@ -1,7 +1,7 @@
 <template>
 	<div
 		:style="{ width: dimension + 'px', height: dimension + 'px' }"
-		:class="[ 'battleships__field', 'battleships__field_battlefield', activeClass ]">
+		:class="[ 'field', 'battlefield', inactiveClass ]">
 		<Ship
 			v-for="ship of ships"
 			:key="ship.id"
@@ -38,12 +38,6 @@
 			shoot: {
 				type: Function,
 				default: () => {}
-			}
-		},
-
-		computed: {
-			activeClass() {
-				return this.isActive ? '' : 'inactive';
 			}
 		}
 	};

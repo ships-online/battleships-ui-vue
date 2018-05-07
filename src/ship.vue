@@ -29,7 +29,7 @@
 
 		computed: {
 			isCollisionClass() {
-				return this.model.isCollision ? 'ship-collision' : '';
+				return this.model.isCollision ? 'collision' : '';
 			},
 
 			left() {

@@ -1,7 +1,7 @@
 <template>
 	<div
 		:style="{ width: dimension + 'px', height: dimension + 'px' }"
-		class="battleships__field battleships__field_battlefield">
+		:class="[ 'field', 'battlefield', inactiveClass ]">
 		<MarkerField
 			v-for="field of fields"
 			v-if="field.isMissed || field.isHit"

@@ -1,6 +1,6 @@
 <template>
 	<div
-		:class="[ 'marker', stateClass ]"
+		:class="[ 'marker', typeClass ]"
 		:style="{ top, left, width, height: width }"/>
 </template>
 
@@ -21,7 +21,7 @@
 		},
 
 		computed: {
-			stateClass() {
+			typeClass() {
 				if ( this.model.isMissed ) {
 					return 'missed';
 				} else if ( this.model.isHit ) {

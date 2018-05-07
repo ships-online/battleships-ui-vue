@@ -1,7 +1,7 @@
 <template>
 	<div
 		:style="{ width: dimension + 'px', height: dimension + 'px' }"
-		class="battleships__field">
+		class="field invite">
 
 		<div v-if="player.isHost && !opponent.isInGame">
 			<p>Share this link with your friend to play with him</p>

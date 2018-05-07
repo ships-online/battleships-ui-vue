@@ -34,7 +34,7 @@
 
 		computed: {
 			activeClass() {
-				return this.show ? 'aim-active' : '';
+				return this.show ? 'active' : '';
 			},
 
 			left() {

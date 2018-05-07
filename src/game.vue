@@ -1,6 +1,6 @@
 <template>
 	<div class="battleships">
-		<div class="battleships-menu">
+		<div class="menu">
 			<button
 				:disabled="game.player.isReady"
 				@click="random">Randomize</button>
@@ -14,7 +14,7 @@
 			<PlayerBattlefield
 				:size="size"
 				:cell-size="cellSize"
-				:is-active="game.activePlayerId === game.opponent.id"
+				:is-active="!game.activePlayerId || game.activePlayerId === game.opponent.id"
 				:ships="playerShips"
 				:fields="playerFields"
 				:rotate-ship="rotateShip"
