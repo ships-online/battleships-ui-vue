@@ -33,6 +33,10 @@
 			player: {
 				type: Player,
 				default: () => {}
+			},
+			isActive: {
+				type: Boolean,
+				default: () => {}
 			}
 		},
 
