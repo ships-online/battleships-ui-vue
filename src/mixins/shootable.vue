@@ -21,11 +21,18 @@
 			} );
 
 			this.$el.addEventListener( 'mousemove', evt => {
-				const left = evt.clientX - bounds.left;
-				const top = evt.clientY - bounds.top;
+				const posX = Math.floor( ( evt.clientX - bounds.left ) / this.cellSize );
+				const posY = Math.floor( ( evt.clientY - bounds.top ) / this.cellSize );
+				const x = Math.min( posX, this.size - 1 );
+				const y = Math.min( posY, this.size - 1 );
 
-				this.aimX = Math.min( Math.floor( left / this.cellSize ), this.size - 1 );
-				this.aimY = Math.min( Math.floor( top / this.cellSize ), this.size - 1 );
+				if ( this.fields.some( field => field.id === `${ x }x${ y }` ) ) {
+					this.isAimVisible = false;
+				} else {
+					this.isAimVisible = true;
+					this.aimX = x;
+					this.aimY = y;
+				}
 			} );
 		}
 	};
