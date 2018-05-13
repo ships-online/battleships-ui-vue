@@ -21,7 +21,7 @@
 					Ships schema
 					<button
 						type="button"
-						@click="handleAdd">Add</button>
+						@click="handleAdd">Add ship type</button>
 				</p>
 				<ul>
 					<li
