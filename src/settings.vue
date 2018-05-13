@@ -2,7 +2,9 @@
 	<form
 		v-if="isVisible"
 		class="game-settings"
-		@submit="handleSubmit">
+		tabindex="-1"
+		@submit="handleSubmit"
+		@keydown="handleKeydown">
 		<div>
 			<label for="set-size">Battlefield size:</label>
 			<input
@@ -59,9 +61,23 @@
 		},
 
 		computed: {
-			isVisible() {
-				return this.$parent.isVisible;
+			isVisible: {
+				get() {
+					return this.$parent.isVisible;
+				},
+
+				set( value ) {
+					this.$parent.isVisible = value;
+				}
 			}
+		},
+
+		mounted() {
+			this.$watch( 'isVisible', value => {
+				if ( value ) {
+					this.$el.querySelector( 'input' ).focus();
+				}
+			} );
 		},
 
 		methods: {
@@ -74,6 +90,7 @@
 				}, {} );
 
 				this.$parent.onChange( this.size, ships );
+				this.isVisible = false;
 			},
 
 			handleRemove( index ) {
@@ -82,6 +99,12 @@
 
 			handleAdd() {
 				this.shipTypes.push( [ 0, 0 ] );
+			},
+
+			handleKeydown( evt ) {
+				if ( evt.keyCode === 27 ) {
+					this.isVisible = false;
+				}
 			}
 		}
 	};
@@ -97,6 +120,7 @@
 		background: #fff;
 		max-width: 350px;
 		padding: 20px;
+		outline: 0;
 	}
 
 	.game-settings > p {
