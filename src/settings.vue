@@ -109,6 +109,10 @@
 		text-align: center;
 	}
 
+	.game-settings button {
+		font-size: 16px;
+	}
+
 	.game-settings ul,
 	.game-settings li {
 		list-style: none;
