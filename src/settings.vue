@@ -70,6 +70,12 @@
 					this.$el.querySelector( 'input' ).focus();
 				}
 			} );
+
+			document.addEventListener( 'click', evt => {
+				if ( !this.$el.contains( evt.target ) ) {
+					this.isVisible = false;
+				}
+			} );
 		},
 
 		methods: {
