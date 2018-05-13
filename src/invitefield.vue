@@ -3,11 +3,19 @@
 		:style="{ width: dimension + 'px', height: dimension + 'px' }"
 		class="field invite">
 
-		<div v-if="player.isHost && !opponent.isInGame">
+		<div
+			v-if="player.isHost && !opponent.isInGame"
+			class="url">
 			<p>Share this link with your friend to play with him</p>
-			<input
-				:value="inviteUrl"
-				readonly>
+			<div class="input-group">
+				<input
+					ref="url"
+					:value="inviteUrl"
+					readonly>
+				<button
+					ref="copy"
+					@click="copy">Copy</button>
+			</div>
 		</div>
 
 		<div v-if="player.isInGame && !player.isReady && opponent.isInGame">
@@ -72,6 +80,18 @@
 			ready: {
 				type: Function,
 				default: () => {}
+			}
+		},
+
+		methods: {
+			copy() {
+				this.$refs.url.select();
+				document.execCommand( 'copy' );
+				this.$refs.copy.textContent = 'Copied';
+
+				setTimeout( () => {
+					this.$refs.copy.textContent = 'Copy';
+				}, 1000 );
 			}
 		}
 	};
