@@ -1,5 +1,5 @@
 <template>
-	<div class="battleships">
+	<div>
 		<div class="menu">
 			<button
 				:disabled="game.player.isReady"
