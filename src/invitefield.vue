@@ -6,7 +6,7 @@
 		<div
 			v-if="player.isHost && !opponent.isInGame"
 			class="url">
-			<p>Share this link with your friend to play with him</p>
+			<p>Share this link to play with your friend</p>
 			<div class="input-group">
 				<input
 					ref="url"
@@ -27,7 +27,7 @@
 		</p>
 
 		<p v-if="player.isReady && opponent.isInGame && !opponent.isReady">
-			Wait until your opponent finish arranging ships.
+			Wait until your opponent finishes arranging ships.
 		</p>
 
 		<p v-if="player.isInGame && opponent.isReady">
