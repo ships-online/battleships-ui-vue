@@ -43,3 +43,18 @@
 		}
 	};
 </script>
+
+<style>
+	.marker {
+		position: absolute;
+		background: rgba(255, 0, 0, .3);
+
+		&.missed {
+			background: rgba(255, 0, 0, .3);
+		}
+
+		&.hit {
+			background: rgba(0, 255, 0, .3);
+		}
+	}
+</style>

@@ -135,3 +135,20 @@
 		return document.body.clientWidth - MARGIN;
 	}
 </script>
+
+<style>
+	.menu {
+		text-align: left;
+		padding: 10px 0;
+	}
+
+	.wrapper {
+		margin: 0 auto;
+		display: inline-block;
+
+		.fields-container {
+			display: flex;
+			justify-content: space-between;
+		}
+	}
+</style>

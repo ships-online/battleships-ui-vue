@@ -47,3 +47,15 @@
 		}
 	};
 </script>
+
+<style>
+	.battlefield {
+		background: url('../../../battleships-theme/src/images/border.svg');
+		padding: 0 1px 1px 0;
+		transition: opacity .5s;
+
+		& .inactive {
+			opacity: .2;
+		}
+	}
+</style>

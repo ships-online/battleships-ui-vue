@@ -51,3 +51,15 @@
 		}
 	};
 </script>
+
+<style>
+	.aim {
+		position: absolute;
+		background: rgba(100, 100, 100, .2);
+		display: none;
+
+		&.active {
+			display: block;
+		}
+	}
+</style>

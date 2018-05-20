@@ -73,3 +73,15 @@
 		}
 	};
 </script>
+
+<style>
+	.ship {
+		position: absolute;
+		margin: -1px 0 0 -1px;
+		border: solid 2px var( --battleships-ship-border-color );
+
+		&.collision {
+			border-color: var( --battleships-ship-collision-border-color );
+		}
+	}
+</style>
