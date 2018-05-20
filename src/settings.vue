@@ -1,11 +1,12 @@
 <template>
 	<div :class="[ 'settings', activeClass ]">
 		<button
+			:disabled="disabled"
 			class="settings-button"
 			@click="handleClick">Settings</button>
 
 		<form
-			v-if="isVisible"
+			v-if="isOpened"
 			class="settings-panel"
 			tabindex="-1"
 			@submit="handleSubmit"
@@ -16,6 +17,7 @@
 				<input
 					id="set-size"
 					v-model.number="size"
+					:disabled="disabled"
 					type="number"
 					min="2">
 			</div>
@@ -24,6 +26,7 @@
 				<p>
 					Ships schema
 					<button
+						:disabled="disabled"
 						type="button"
 						@click="handleAdd">Add ship type</button>
 				</p>
@@ -37,6 +40,7 @@
 							v-model.number="type[ 0 ]"
 							:id="'ship-length-' + index"
 							:max="size"
+							:disabled="disabled"
 							type="number"
 							min="1">
 
@@ -44,17 +48,23 @@
 						<input
 							v-model.number="type[ 1 ]"
 							:id="'ship-number-' + index"
+							:disabled="disabled"
 							type="number"
 							min="1">
 
 						<button
+							:disabled="disabled"
 							type="button"
 							@click="() => handleRemove( index )">X</button>
 					</li>
 				</ul>
 			</div>
 
-			<p><button type="submit">Set settings</button></p>
+			<p>
+				<button
+					:disabled="disabled"
+					type="submit">Set settings</button>
+			</p>
 		</form>
 	</div>
 </template>
@@ -63,7 +73,7 @@
 	export default {
 		data() {
 			return {
-				isVisible: false,
+				isOpened: false,
 				size: 10,
 				shipTypes: [ [ 1, 4 ], [ 2, 3 ], [ 3, 2 ], [ 4, 1 ] ]
 			};
@@ -71,12 +81,16 @@
 
 		computed: {
 			activeClass() {
-				return this.isVisible ? 'active' : '';
+				return this.isOpened ? 'active' : '';
+			},
+
+			disabled() {
+				return this.$parent.disabled;
 			}
 		},
 
 		mounted() {
-			this.$watch( 'isVisible', value => {
+			this.$watch( 'isOpened', value => {
 				if ( value ) {
 					this.$el.querySelector( 'input' ).focus();
 				}
@@ -84,7 +98,7 @@
 
 			document.addEventListener( 'click', evt => {
 				if ( !this.$el.contains( evt.target ) ) {
-					this.isVisible = false;
+					this.isOpened = false;
 				}
 			} );
 		},
@@ -99,7 +113,7 @@
 				}, {} );
 
 				this.$parent.onChange( this.size, ships );
-				this.isVisible = false;
+				this.isOpened = false;
 			},
 
 			handleRemove( index ) {
@@ -112,12 +126,12 @@
 
 			handleKeydown( evt ) {
 				if ( evt.keyCode === 27 ) {
-					this.isVisible = false;
+					this.isOpened = false;
 				}
 			},
 
 			handleClick() {
-				this.isVisible = !this.isVisible;
+				this.isOpened = !this.isOpened;
 			}
 		}
 	};
