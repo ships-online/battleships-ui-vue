@@ -54,7 +54,7 @@
 		padding: 0 1px 1px 0;
 		transition: opacity .5s;
 
-		& .inactive {
+		&.inactive {
 			opacity: .2;
 		}
 	}
