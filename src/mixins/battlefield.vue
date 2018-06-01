@@ -42,15 +42,30 @@
 		},
 
 		mounted() {
-			this.$watch( 'cellSize', () => ( this.$el.style.backgroundSize = toPx( this.cellSize ) ) );
-			this.$el.style.backgroundSize = toPx( this.cellSize );
+			const style = document.createElement( 'style' );
+
+			style.innerHTML = getStylesDefinition( this.cellSize );
+			document.head.appendChild( style );
+
+			this.$watch( 'cellSize', () => ( style.innerHTML = getStylesDefinition( this.cellSize ) ) );
 		}
 	};
+
+	function getStylesDefinition( size ) {
+		return `
+			.battleships .battlefield {
+				background-position: -1px -1px;
+				background-size: ${ toPx( size ) };
+				background-image:
+					linear-gradient( to right, var( --battleships-field-grid-color ) 1px, transparent 1px ),
+					linear-gradient( to bottom, var( --battleships-field-grid-color ) 1px, transparent 1px );
+			}
+		`;
+	}
 </script>
 
 <style>
 	.battlefield {
-		background: url('../../../battleships-theme/src/images/border.svg');
 		padding: 0 1px 1px 0;
 		transition: opacity .5s;
 

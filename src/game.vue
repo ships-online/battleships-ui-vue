@@ -137,6 +137,16 @@
 </script>
 
 <style>
+	.battleships {
+		color: var( --battleships-font-color );
+		font-family: var( --battleships-font-family );
+		font-size: var( --battleships-font-size );
+
+		&, * {
+			box-sizing: border-box;
+		}
+	}
+
 	.menu {
 		text-align: left;
 		padding: 10px 0;
