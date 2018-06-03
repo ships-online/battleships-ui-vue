@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "The Vue version of Battleships game.",
   "scripts": {
-    "test": "battleships-test",
+    "test": "battleships-test --config ./dev/webpack.config.js",
     "lint": "eslint --quiet **/*.js **/*.vue",
     "precommit": "lint-staged"
   },
