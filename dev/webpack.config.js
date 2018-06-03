@@ -38,7 +38,10 @@ module.exports = options => {
 					test: /\.vue$/,
 					loader: 'vue-loader',
 					options: {
-						postcss: getPostCssPlugins( options )
+						postcss: [
+							require( 'postcss-import' )(),
+							require( 'postcss-nested' )()
+						]
 					}
 				},
 				{
@@ -57,14 +60,13 @@ module.exports = options => {
 							loader: 'postcss-loader',
 							options: {
 								ident: 'postcss',
-								plugins: getPostCssPlugins( options )
+								plugins: [
+									require( 'postcss-import' )(),
+									require( 'postcss-nested' )()
+								]
 							}
 						}
 					]
-				},
-				{
-					test: /.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
-					use: 'file-loader?name=[name]-[hash:6].[ext]'
 				}
 			]
 		}
@@ -72,11 +74,3 @@ module.exports = options => {
 
 	return webpackConfig;
 };
-
-function getPostCssPlugins( options ) {
-	return [
-		require( 'postcss-import' )(),
-		require( 'postcss-nested' )(),
-		...( options.minify ? [ require( 'cssnano' )() ] : [] )
-	];
-}

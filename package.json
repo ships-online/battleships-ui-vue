@@ -20,14 +20,25 @@
   "dependencies": {},
   "devDependencies": {
     "@ckeditor/ckeditor5-utils": "^10.0.0",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "battleships-dev-tools": "https://github.com/ships-online/battleships-dev-tools.git",
+    "battleships-core": "https://github.com/ships-online/battleships-core.git",
+    "battleships-engine": "https://github.com/ships-online/battleships-engine.git",
+    "css-loader": "^0.28.11",
     "eslint": "^4.10.0",
     "eslint-config-ckeditor5": "^1.0.6",
     "eslint-plugin-vue": "^4.5.0",
     "gulp": "^3.9.1",
     "husky": "^0.14.3",
     "lint-staged": "^4.3.0",
-    "vue": "^2.5.16"
+    "postcss-import": "^11.1.0",
+    "postcss-loader": "^2.1.5",
+    "postcss-nested": "^3.0.0",
+    "vue": "^2.5.16",
+    "vue-loader": "^14.2.2",
+    "vue-style-loader": "^4.1.0",
+    "vue-template-compiler": "^2.5.16"
   },
   "lint-staged": {
     "**/*.js": "eslint --quiet",
