@@ -54,8 +54,7 @@
 	function getStylesDefinition( size ) {
 		return `
 			.battleships .battlefield {
-				background-position: -1px -1px;
-				background-size: ${ toPx( size ) };
+				background-size: ${ toPx( size ) } ${ toPx( size ) };
 				background-image:
 					linear-gradient( to right, var( --battleships-field-grid-color ) 1px, transparent 1px ),
 					linear-gradient( to bottom, var( --battleships-field-grid-color ) 1px, transparent 1px );
@@ -68,6 +67,7 @@
 	.battlefield {
 		padding: 0 1px 1px 0;
 		transition: opacity .5s;
+		background-position: -1px -1px;
 
 		&.inactive {
 			opacity: .2;
