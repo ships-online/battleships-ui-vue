@@ -1,9 +1,11 @@
 <template>
 	<div :class="[ 'settings', activeClass ]">
-		<button
+		<v-button
+			:tooltip="tooltip"
+			:class-name="'settings-button'"
 			:disabled="disabled"
-			class="settings-button"
-			@click="handleClick">Settings</button>
+			:execute="handleClick"
+			label="Settings" />
 
 		<form
 			v-if="isOpened"
@@ -70,7 +72,13 @@
 </template>
 
 <script>
+	import Button from './button.vue';
+
 	export default {
+		components: {
+			'v-button': Button
+		},
+
 		data() {
 			return {
 				isOpened: false,
@@ -86,6 +94,10 @@
 
 			disabled() {
 				return this.$parent.disabled;
+			},
+
+			tooltip() {
+				return this.$parent.tooltip;
 			}
 		},
 
