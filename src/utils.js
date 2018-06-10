@@ -10,11 +10,7 @@ export function collectionToArray( collection ) {
 	const result = Array.from( collection );
 
 	collection.on( 'add', ( evt, item ) => result.push( item ) );
-	collection.on( 'remove', ( evt, item ) => {
-		if ( result.includes( item ) ) {
-			result.splice( result.indexOf( item ), 1 );
-		}
-	} );
+	collection.on( 'remove', ( evt, item ) => result.splice( result.indexOf( item ), 1 ) );
 
 	return result;
 }
