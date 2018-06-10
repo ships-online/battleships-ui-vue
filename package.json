@@ -20,10 +20,11 @@
   "dependencies": {},
   "devDependencies": {
     "@ckeditor/ckeditor5-utils": "^10.0.0",
+    "@vue/test-utils": "^1.0.0-beta.18",
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
-    "battleships-dev-tools": "https://github.com/ships-online/battleships-dev-tools.git",
     "battleships-core": "https://github.com/ships-online/battleships-core.git",
+    "battleships-dev-tools": "https://github.com/ships-online/battleships-dev-tools.git",
     "battleships-engine": "https://github.com/ships-online/battleships-engine.git",
     "css-loader": "^0.28.11",
     "eslint": "^4.10.0",
