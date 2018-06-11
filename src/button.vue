@@ -3,13 +3,13 @@
 		<button
 			:class="[ 'btn', className ]"
 			:disabled="disabled"
-			@click="execute"
-		>{{ label }}</button>
+			:type="type"
+			@click="execute"><slot /></button>
 
 		<span
 			v-if="tooltip"
-			class="tooltip"
-		>{{ tooltip }}</span>
+			:class="[ 'tooltip', tooltipPosition ]"
+			v-html="tooltip"/>
 	</div>
 </template>
 
@@ -28,13 +28,22 @@
 				type: Boolean,
 				default: false
 			},
+			className: {
+				type: String,
+				default: ''
+			},
+			type: {
+				type: String,
+				default: 'button'
+			},
 			tooltip: {
 				type: String,
 				default: ''
 			},
-			className: {
+			tooltipPosition: {
 				type: String,
-				default: ''
+				default: 'center',
+				validator: value => [ 'center', 'toLeft', 'toRight' ].includes( value )
 			}
 		}
 	};
@@ -43,6 +52,7 @@
 <style>
 	.btn-wrapper {
 		position: relative;
+		display: inline-block;
 
 		.btn {
 			font-size: 1em;
@@ -62,6 +72,12 @@
 				& + .tooltip {
 					opacity: 1;
 					visibility: visible;
+					transition-delay: .2s;
+					transform: translateY(5px);
+
+					&.center {
+						transform: translate(-50%,5px);
+					}
 				}
 
 				&:not([disabled]) {
@@ -73,19 +89,20 @@
 
 		.tooltip {
 			position: absolute;
+			z-index: 10;
 			display: block;
 			padding: 3px 8px 4px;
-			left: 50%;
 			background: #000;
 			color: #fff;
 			font-size: 13px;
-			transform: translate(-50%, 5px);
+			transform: translateY(3px);
 			border-radius: 2px;
+			white-space: nowrap;
 
 			opacity: 0;
 			visibility: hidden;
 			transition: .3s;
-			transition-property: opacity, visibility;
+			transition-property: opacity, visibility, transform;
 
 			&:before {
 				position: absolute;
@@ -94,10 +111,34 @@
 				width: 0;
 				height: 0;
 				top: -10px;
-				left: 50%;
-				transform: translateX(-50%);
 				border: solid 5px;
 				border-color: transparent transparent #000 transparent;
+			}
+
+			&.toLeft {
+				left: 0;
+
+				&:before {
+					left: 15px;
+				}
+			}
+
+			&.toRight {
+				right: 0;
+
+				&:before {
+					right: 15px;
+				}
+			}
+
+			&.center {
+				left: 50%;
+				transform: translateX(-50%);
+
+				&:before {
+					left: 50%;
+					transform: translateX(-50%);
+				}
 			}
 		}
 	}

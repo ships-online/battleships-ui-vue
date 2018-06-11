@@ -1,11 +1,11 @@
 <template>
 	<div :class="[ 'settings', activeClass ]">
-		<v-button
+		<v-Button
 			:tooltip="tooltip"
+			:tooltip-position="'toRight'"
 			:class-name="'settings-button'"
 			:disabled="disabled"
-			:execute="handleClick"
-			label="Settings" />
+			:execute="handleClick">Settings</v-Button>
 
 		<form
 			v-if="isOpened"
@@ -27,10 +27,10 @@
 			<div>
 				<p>
 					Ships schema
-					<button
+					<v-Button
 						:disabled="disabled"
-						type="button"
-						@click="handleAdd">Add ship type</button>
+						:tooltip="tooltip"
+						:execute="handleAdd">Add ship type</v-Button>
 				</p>
 				<ul>
 					<li
@@ -54,18 +54,19 @@
 							type="number"
 							min="1">
 
-						<button
+						<v-Button
 							:disabled="disabled"
-							type="button"
-							@click="() => handleRemove( index )">X</button>
+							:tooltip="tooltip"
+							:execute="() => handleRemove( index )">X</v-Button>
 					</li>
 				</ul>
 			</div>
 
 			<p>
-				<button
+				<v-Button
 					:disabled="disabled"
-					type="submit">Set settings</button>
+					:tooltip="tooltip"
+					:type="'submit'">Set settings</v-Button>
 			</p>
 		</form>
 	</div>
@@ -76,7 +77,7 @@
 
 	export default {
 		components: {
-			'v-button': Button
+			'v-Button': Button
 		},
 
 		data() {
@@ -154,6 +155,7 @@
 		.settings-button {
 			position: relative;
 			z-index: 1;
+			font-size: 12px;
 		}
 
 		&.active {

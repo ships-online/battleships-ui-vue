@@ -12,9 +12,7 @@
 					ref="url"
 					:value="inviteUrl"
 					readonly>
-				<button
-					ref="copy"
-					@click="copy">Copy</button>
+				<v-Button :execute="copy">{{ buttonLabel }}</v-Button>
 			</div>
 		</div>
 
@@ -40,7 +38,7 @@
 
 		<div v-if="!player.isHost && !player.isInGame">
 			<p>You are invited to the Battleships game.</p>
-			<button @click="join">Join</button>
+			<v-Button :execute="join">Join</v-Button>
 		</div>
 
 		<p v-if="!player.isHost && !player.isInGame && interestedPlayersNumber > 1">
@@ -51,9 +49,14 @@
 
 <script>
 	import Field from './mixins/field.vue';
+	import Button from './button.vue';
 	import Player from 'battleships-core/src/player.js';
 
 	export default {
+		components: {
+			'v-Button': Button
+		},
+
 		mixins: [ Field ],
 
 		props: {
@@ -83,14 +86,20 @@
 			}
 		},
 
+		data() {
+			return {
+				buttonLabel: 'Copy'
+			};
+		},
+
 		methods: {
 			copy() {
 				this.$refs.url.select();
 				document.execCommand( 'copy' );
-				this.$refs.copy.textContent = 'Copied';
+				this.buttonLabel = 'Copied';
 
 				setTimeout( () => {
-					this.$refs.copy.textContent = 'Copy';
+					this.buttonLabel = 'Copy';
 				}, 1000 );
 			}
 		}

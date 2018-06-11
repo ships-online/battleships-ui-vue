@@ -1,12 +1,15 @@
 <template>
 	<div>
 		<div class="menu">
-			<button
+			<v-Button
 				:disabled="game.player.isReady"
-				@click="random">Randomize</button>
-			<button
+				:tooltip="game.player.isReady ? 'You have arranged your ships' : ''"
+				:tooltip-position="'toLeft'"
+				:execute="random">Randomize</v-Button>
+			<v-Button
 				:disabled="game.player.isReady || !game.player.isInGame"
-				@click="ready">Ready</button>
+				:tooltip="game.player.isReady ? 'You are ready' : !game.player.isInGame ? 'Join the game first' : ''"
+				:execute="ready">Ready</v-Button>
 		</div>
 		<div
 			:style="{ width }"
@@ -60,6 +63,7 @@
 	import OpponentBattlefield from './opponentbattlefield.vue';
 	import InviteField from './invitefield.vue';
 	import SummaryField from './summaryfield.vue';
+	import Button from './button.vue';
 	import { getCellSize, toPx, collectionToArray } from './utils.js';
 
 	const MARGIN = 20;
@@ -69,7 +73,8 @@
 			PlayerBattlefield,
 			OpponentBattlefield,
 			InviteField,
-			SummaryField
+			SummaryField,
+			'v-Button': Button
 		},
 
 		data() {
