@@ -1,5 +1,12 @@
 <script>
 	export default {
+		props: {
+			shoot: {
+				type: Function,
+				default: () => {}
+			}
+		},
+
 		data() {
 			return {
 				isAimVisible: false,
@@ -34,6 +41,13 @@
 					this.aimY = y;
 				}
 			} );
+		},
+
+		methods: {
+			handleShoot( position ) {
+				this.isAimVisible = false;
+				this.shoot( position );
+			}
 		}
 	};
 </script>

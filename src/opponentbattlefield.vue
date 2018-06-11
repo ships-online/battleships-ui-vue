@@ -18,7 +18,7 @@
 			:x="aimX"
 			:y="aimY"
 			:show="isActive && isAimVisible"
-			:shoot="shoot"/>
+			:shoot="handleShoot"/>
 	</div>
 </template>
 
@@ -32,13 +32,6 @@
 			Aim
 		},
 
-		mixins: [ Battlefield, Shootable ],
-
-		props: {
-			shoot: {
-				type: Function,
-				default: () => {}
-			}
-		}
+		mixins: [ Battlefield, Shootable ]
 	};
 </script>
