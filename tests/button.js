@@ -14,10 +14,12 @@ describe( 'Button', () => {
 	it( 'should render with given props', () => {
 		const wrapper = shallowMount( Button, {
 			propsData: {
-				label: 'Foo',
 				tooltip: 'Bar',
 				className: 'biz',
 				disabled: true
+			},
+			slots: {
+				default: '<span>Foo</span>',
 			}
 		} );
 
