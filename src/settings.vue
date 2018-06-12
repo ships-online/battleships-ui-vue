@@ -152,6 +152,8 @@
 
 <style>
 	.settings {
+		position: relative;
+
 		.settings-button {
 			position: relative;
 			z-index: 1;
