@@ -7,8 +7,8 @@
 				:tooltip-position="'toLeft'"
 				:execute="random">Randomize</v-Button>
 			<v-Button
-				:disabled="game.player.isReady || !game.player.isInGame"
-				:tooltip="game.player.isReady ? 'You are ready' : !game.player.isInGame ? 'Join the game first' : ''"
+				:disabled="game.player.isReady || !game.player.isInGame || game.player.battlefield.isCollision"
+				:tooltip="readyButtonTooltip"
 				:execute="ready">Ready</v-Button>
 		</div>
 		<div
@@ -98,6 +98,18 @@
 
 			width() {
 				return toPx( ( this.cellSize * this.size ) * 2 + this.cellSize );
+			},
+
+			readyButtonTooltip() {
+				if ( this.game.player.isReady ) {
+					return 'You are ready';
+				} else if ( !this.game.player.isInGame ) {
+					return 'Join the game first';
+				} else if ( this.game.player.battlefield.isCollision ) {
+					return 'Ships configuration is invalid';
+				}
+
+				return '';
 			}
 		},
 
