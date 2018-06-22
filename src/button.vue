@@ -92,8 +92,8 @@
 			z-index: 10;
 			display: block;
 			padding: 3px 8px 4px;
-			background: #000;
-			color: #fff;
+			background: var( --battleships-tooltip-background-color );
+			color: var( --battleships-tooltip-color );
 			font-size: 13px;
 			transform: translateY(3px);
 			border-radius: 2px;
@@ -112,7 +112,7 @@
 				height: 0;
 				top: -10px;
 				border: solid 5px;
-				border-color: transparent transparent #000 transparent;
+				border-color: transparent transparent var( --battleships-tooltip-background-color ) transparent;
 			}
 
 			&.toLeft {

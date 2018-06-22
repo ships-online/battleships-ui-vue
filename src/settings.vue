@@ -173,7 +173,7 @@
 			width: 395px;
 			text-align: left;
 			border: solid 1px var( --battleships-button-border-color );
-			background: #fff;
+			background: var( --battleships-background-color );
 			padding: 20px;
 			outline: 0;
 			transform: translateY( -1px );

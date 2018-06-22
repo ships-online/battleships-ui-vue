@@ -79,9 +79,11 @@
 		position: absolute;
 		margin: -1px 0 0 -1px;
 		border: solid 2px var( --battleships-ship-border-color );
+		background: var( --battleships-ship-background-color );
 
 		&.collision {
 			border-color: var( --battleships-ship-collision-border-color );
+			background: var( --battleships-ship-collision-background-color );
 		}
 	}
 </style>

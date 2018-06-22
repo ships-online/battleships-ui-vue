@@ -158,24 +158,62 @@
 		color: var( --battleships-font-color );
 		font-family: var( --battleships-font-family );
 		font-size: var( --battleships-font-size );
+		background: var( --battleships-background-color );
 
 		&, * {
 			box-sizing: border-box;
 		}
-	}
 
-	.menu {
-		text-align: left;
-		padding: 10px 0;
-	}
+		.menu {
+			text-align: left;
+			padding: 10px 0;
+		}
 
-	.wrapper {
-		margin: 0 auto;
-		display: inline-block;
+		.wrapper {
+			margin: 0 auto;
+			display: inline-block;
 
-		.fields-container {
+			.fields-container {
+				display: flex;
+				justify-content: space-between;
+			}
+		}
+
+		input {
+			font-size: 1em;
+			width: 100%;
+			padding: 5px;
+			border: solid 1px var(--battleships-button-border-color);
+			border-radius: var(--battleships-border-radius);
+			background: var( --battleships-input-background-color );
+			color: var( --battleships-input-color );
+		}
+
+		input {
+			&[disabled] {
+				opacity: 0.5;
+			}
+		}
+
+		.input-group {
+			margin: 0 auto;
 			display: flex;
-			justify-content: space-between;
+			align-content: space-between;
+			max-width: 400px;
+
+			input {
+				border-top-right-radius: 0;
+				border-bottom-right-radius: 0;
+			}
+
+			.btn-wrapper {
+				.btn {
+					border-top-left-radius: 0;
+					border-bottom-left-radius: 0;
+					border-left: 0;
+					width: 90px;
+				}
+			}
 		}
 	}
 </style>
