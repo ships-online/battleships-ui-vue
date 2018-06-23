@@ -7,7 +7,7 @@ describe( 'getCellSize()', () => {
 	} );
 
 	it( 'should return max cell size', () => {
-		expect( getCellSize( 10, 1100 ) ).to.equal( 40 );
+		expect( getCellSize( 10, 1100 ) ).to.equal( 46 );
 	} );
 } );
 
