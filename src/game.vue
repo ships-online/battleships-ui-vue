@@ -61,7 +61,7 @@
 	import Button from './button.vue';
 	import GameMenu from './gamemenu.vue';
 	import SelectTheme from './selecttheme.vue';
-	import { getCellSize, toPx, collectionToArray } from './utils.js';
+	import { getCellSize, toPx, collectionToArray, getClientWidth } from './utils.js';
 
 	export default {
 		components: {
@@ -108,10 +108,6 @@
 			}
 		}
 	};
-
-	function getClientWidth() {
-		return document.body.clientWidth - 20;
-	}
 </script>
 
 <style rel="stylesheet/postcss">

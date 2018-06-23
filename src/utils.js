@@ -6,7 +6,7 @@
  * @returns {number}
  */
 export function getCellSize( size, availableWidth ) {
-	return Math.min( Math.floor( availableWidth / ( ( size * 2 ) + 1 ) ), 40 );
+	return Math.min( Math.floor( availableWidth / ( ( size * 2 ) + 1 ) ), 45 );
 }
 
 /**
@@ -33,6 +33,15 @@ export function collectionToArray( collection ) {
 	collection.on( 'remove', ( evt, item ) => result.splice( result.indexOf( item ), 1 ) );
 
 	return result;
+}
+
+/**
+ * Returns screen width reduced by a side margin.
+ *
+ * @returns {Number}
+ */
+export function getClientWidth() {
+	return document.body.clientWidth - 20;
 }
 
 /**
