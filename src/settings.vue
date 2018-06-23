@@ -67,6 +67,11 @@
 					:disabled="disabled"
 					:tooltip="tooltip"
 					:type="'submit'">Set settings</v-Button>
+
+				<v-Button
+					:disabled="disabled"
+					:tooltip="tooltip"
+					:execute="reset">Reset default</v-Button>
 			</p>
 		</form>
 	</div>
@@ -75,16 +80,40 @@
 <script>
 	import Button from './button.vue';
 
+	const defaultSettings = {
+		size: 10,
+		shipsSchema: { 1: 4, 2: 3, 3: 2, 4: 1 }
+	};
+
 	export default {
 		components: {
 			'v-Button': Button
 		},
 
+		props: {
+			disabled: {
+				type: Boolean,
+				default: false
+			},
+			tooltip: {
+				type: String,
+				default: ''
+			},
+			settings: {
+				type: Object,
+				default: () => defaultSettings
+			},
+			onChange: {
+				type: Function,
+				default: () => {}
+			}
+		},
+
 		data() {
 			return {
 				isOpened: false,
-				size: 10,
-				shipTypes: [ [ 1, 4 ], [ 2, 3 ], [ 3, 2 ], [ 4, 1 ] ]
+				size: 0,
+				shipTypes: [],
 			};
 		},
 
@@ -92,14 +121,6 @@
 			activeClass() {
 				return this.isOpened ? 'active' : '';
 			},
-
-			disabled() {
-				return this.$parent.disabled;
-			},
-
-			tooltip() {
-				return this.$parent.tooltip;
-			}
 		},
 
 		mounted() {
@@ -114,18 +135,20 @@
 					this.isOpened = false;
 				}
 			} );
+
+			this.size = this.settings.size;
+			this.shipTypes = schemaToTypes( this.settings.shipsSchema );
 		},
 
 		methods: {
 			handleSubmit( evt ) {
 				evt.preventDefault();
 
-				const ships = this.shipTypes.reduce( ( result, value ) => {
-					result[ value[ 0 ] ] = value[ 1 ];
-					return result;
-				}, {} );
+				this.onChange( {
+					size: this.size,
+					shipsSchema: shipsToSchema( this.shipTypes )
+				} );
 
-				this.$parent.onChange( this.size, ships );
 				this.isOpened = false;
 			},
 
@@ -145,19 +168,39 @@
 
 			handleClick() {
 				this.isOpened = !this.isOpened;
+			},
+
+			reset() {
+				this.size = defaultSettings.size;
+				this.shipTypes = schemaToTypes( defaultSettings.shipsSchema );
 			}
 		}
 	};
+
+	function schemaToTypes( shipsSchema ) {
+		return Object.keys( shipsSchema ).reduce( ( result, key ) => {
+			result.push( [ key, shipsSchema[ key ] ] );
+
+			return result;
+		}, [] );
+	}
+
+	function shipsToSchema( shipTypes ) {
+		return shipTypes.reduce( ( result, value ) => {
+			result[ value[ 0 ] ] = value[ 1 ];
+			return result;
+		}, {} );
+	}
 </script>
 
 <style>
 	.settings {
 		position: relative;
+		z-index: 10;
 
 		.settings-button {
 			position: relative;
 			z-index: 1;
-			font-size: 12px;
 		}
 
 		&.active {
@@ -177,9 +220,12 @@
 			padding: 20px;
 			outline: 0;
 			transform: translateY( -1px );
+			box-shadow: rgba(0,0,0,0.3) 0px 5px 15px;
 
 			& > p {
-				margin-bottom: 0;
+				margin: 20px 0 0;
+				display: flex;
+				justify-content: space-between;
 			}
 
 			input {

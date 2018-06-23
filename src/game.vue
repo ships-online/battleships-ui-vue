@@ -10,7 +10,14 @@
 				:disabled="game.player.isReady || !game.player.isInGame || game.player.battlefield.isCollision"
 				:tooltip="readyButtonTooltip"
 				:execute="ready">Ready</v-Button>
+
+			<Settings
+				:disabled="game.status !== 'available' || game.interestedPlayersNumber > 0 || game.player.isReady"
+				:tooltip="settingsTooltip"
+				:settings="gameSettings"
+				:on-change="onSettingsChange"/>
 		</div>
+
 		<div
 			:style="{ width }"
 			class="fields-container">
@@ -63,10 +70,13 @@
 	import OpponentBattlefield from './opponentbattlefield.vue';
 	import InviteField from './invitefield.vue';
 	import SummaryField from './summaryfield.vue';
+	import Settings from './settings.vue';
 	import Button from './button.vue';
-	import { getCellSize, toPx, collectionToArray } from './utils.js';
+	import { getCellSize, toPx, collectionToArray, settings } from './utils.js';
 
 	const MARGIN = 20;
+
+	window.settings = settings;
 
 	export default {
 		components: {
@@ -74,6 +84,7 @@
 			OpponentBattlefield,
 			InviteField,
 			SummaryField,
+			Settings,
 			'v-Button': Button
 		},
 
@@ -110,6 +121,22 @@
 				}
 
 				return '';
+			},
+
+			settingsTooltip() {
+				if ( this.game.status !== 'available' ) {
+					return 'Cannot change game settings<br>after the game has started';
+				} else if ( this.game.player.isReady ) {
+					return 'Cannot change game settings<br>when you are ready for the battle';
+				} else if ( this.game.interestedPlayersNumber > 0 ) {
+					return 'Cannot change game settings<br>while there are interested players';
+				}
+
+				return '';
+			},
+
+			gameSettings() {
+				return this.game.player.battlefield.settings;
 			}
 		},
 
@@ -144,6 +171,10 @@
 
 			rematch() {
 				this.game.requestRematch();
+			},
+
+			onSettingsChange( settings ) {
+				this.$parent.onSettingsChange( settings );
 			}
 		}
 	};
@@ -165,8 +196,16 @@
 		}
 
 		.menu {
-			text-align: left;
+			display: flex;
 			padding: 10px 0;
+
+			& > .btn-wrapper {
+				margin-right: 10px;
+			}
+
+			.settings {
+				margin-left: auto;
+			}
 		}
 
 		.wrapper {
