@@ -10,14 +10,11 @@
 			:tooltip="readyButtonTooltip"
 			:execute="() => game.ready()">Ready</v-Button>
 
-		<div class="to-right">
-			<Select-theme />
-			<Settings
-				:disabled="game.status !== 'available' || game.interestedPlayersNumber > 0 || game.player.isReady"
-				:tooltip="settingsTooltip"
-				:settings="game.player.battlefield.settings"
-				:on-change="onSettingsChange"/>
-		</div>
+		<Settings
+			:disabled="game.status !== 'available' || game.interestedPlayersNumber > 0 || game.player.isReady"
+			:tooltip="settingsTooltip"
+			:settings="game.player.battlefield.settings"
+			:on-change="onSettingsChange"/>
 	</div>
 </template>
 
@@ -25,14 +22,12 @@
 	import Game from 'battleships-core/src/game';
 
 	import Settings from './settings.vue';
-	import SelectTheme from './selecttheme.vue';
 	import Button from './button.vue';
 
 	export default {
 		components: {
 			Settings,
-			SelectTheme,
-			'v-Button': Button
+			vButton: Button
 		},
 
 		props: {
@@ -83,8 +78,7 @@
 			margin-right: 10px;
 		}
 
-		.to-right {
-			display: flex;
+		.settings {
 			margin-left: auto;
 		}
 	}

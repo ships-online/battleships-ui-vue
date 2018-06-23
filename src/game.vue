@@ -48,6 +48,8 @@
 				:ready="() => game.ready()"/>
 
 		</div>
+
+		<Select-theme />
 	</div>
 </template>
 
@@ -58,9 +60,8 @@
 	import SummaryField from './summaryfield.vue';
 	import Button from './button.vue';
 	import GameMenu from './gamemenu.vue';
+	import SelectTheme from './selecttheme.vue';
 	import { getCellSize, toPx, collectionToArray } from './utils.js';
-
-	const MARGIN = 20;
 
 	export default {
 		components: {
@@ -68,6 +69,7 @@
 			OpponentBattlefield,
 			InviteField,
 			SummaryField,
+			SelectTheme,
 			GameMenu,
 			vButton: Button
 		},
@@ -108,7 +110,7 @@
 	};
 
 	function getClientWidth() {
-		return document.body.clientWidth - MARGIN;
+		return document.body.clientWidth - 20;
 	}
 </script>
 

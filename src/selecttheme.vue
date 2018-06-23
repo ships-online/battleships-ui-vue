@@ -1,12 +1,15 @@
 <template>
-	<ul class="select-theme">
-		<li
-			v-for="theme of themes"
-			:key="theme.name"
-			:title="theme.name"
-			:class="theme.class"
-			@click="() => select( theme )">{{ theme.name }}</li>
-	</ul>
+	<div class="select-theme">
+		Themes:
+		<ul>
+			<li
+				v-for="theme of themes"
+				:key="theme.name"
+				:title="theme.name"
+				:class="theme.class"
+				@click="() => select( theme )">{{ theme.name }}</li>
+		</ul>
+	</div>
 </template>
 
 <script>
@@ -49,27 +52,33 @@
 <style rel="stylesheet/postcss">
 	.select-theme {
 		display: flex;
-		list-style: none;
-		padding: 0;
-		margin: 0 20px 0 0;
 		align-items: center;
+		margin: 10px 0;
 
-		li {
-			width: 20px;
-			height: 20px;
-			margin: 0 7px 0 0;
+		ul {
+			display: flex;
+			list-style: none;
 			padding: 0;
-			text-indent: -999999px;
-			cursor: pointer;
+			margin: 0 0 0 10px;
 
-			&.white {
-				background: #fff;
-				border: solid 2px #ddd;
-			}
+			li {
+				width: 20px;
+				height: 20px;
+				margin: 0 7px 0 0;
+				padding: 0;
+				text-indent: -999999px;
+				cursor: pointer;
 
-			&.dark {
-				background: #000;
-				border: solid 2px #ddd;
+				&.white {
+					background: #fff;
+					border: solid 2px #ddd;
+				}
+
+				&.dark {
+					background: #000;
+					border: solid 2px #ddd;
+				}
+
 			}
 		}
 	}
