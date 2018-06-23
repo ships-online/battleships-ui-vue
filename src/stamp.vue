@@ -44,7 +44,7 @@
 	};
 </script>
 
-<style>
+<style rel="stylesheet/postcss">
 	.marker {
 		position: absolute;
 		background: rgba(255, 0, 0, .3);

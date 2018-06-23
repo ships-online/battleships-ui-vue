@@ -52,7 +52,7 @@
 	};
 </script>
 
-<style>
+<style rel="stylesheet/postcss">
 	.aim {
 		position: absolute;
 		background: rgba(100, 100, 100, .2);

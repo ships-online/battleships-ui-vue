@@ -49,7 +49,7 @@
 	};
 </script>
 
-<style>
+<style rel="stylesheet/postcss">
 	.btn-wrapper {
 		position: relative;
 		display: inline-block;

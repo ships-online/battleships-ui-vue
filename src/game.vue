@@ -189,7 +189,7 @@
 	}
 </script>
 
-<style>
+<style rel="stylesheet/postcss">
 	.battleships {
 		color: var( --battleships-font-color );
 		font-family: var( --battleships-font-family );

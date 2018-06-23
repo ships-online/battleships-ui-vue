@@ -63,7 +63,7 @@
 	}
 </script>
 
-<style>
+<style rel="stylesheet/postcss">
 	.battlefield {
 		padding: 0 1px 1px 0;
 		transition: opacity .5s;

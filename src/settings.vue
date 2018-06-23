@@ -193,7 +193,7 @@
 	}
 </script>
 
-<style>
+<style rel="stylesheet/postcss">
 	.settings {
 		position: relative;
 		z-index: 10;

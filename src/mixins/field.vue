@@ -19,7 +19,7 @@
 	};
 </script>
 
-<style>
+<style rel="stylesheet/postcss">
 	.field {
 		border: solid 1px var(--battleships-field-border-color);
 		background-color: var( --battleships-field-background-color );

@@ -74,7 +74,7 @@
 	};
 </script>
 
-<style>
+<style rel="stylesheet/postcss">
 	.ship {
 		position: absolute;
 		margin: -1px 0 0 -1px;
