@@ -11,11 +11,14 @@
 				:tooltip="readyButtonTooltip"
 				:execute="ready">Ready</v-Button>
 
-			<Settings
-				:disabled="game.status !== 'available' || game.interestedPlayersNumber > 0 || game.player.isReady"
-				:tooltip="settingsTooltip"
-				:settings="gameSettings"
-				:on-change="onSettingsChange"/>
+			<div class="to-right">
+				<SelectTheme />
+				<Settings
+					:disabled="game.status !== 'available' || game.interestedPlayersNumber > 0 || game.player.isReady"
+					:tooltip="settingsTooltip"
+					:settings="gameSettings"
+					:on-change="onSettingsChange"/>
+			</div>
 		</div>
 
 		<div
@@ -71,6 +74,7 @@
 	import InviteField from './invitefield.vue';
 	import SummaryField from './summaryfield.vue';
 	import Settings from './settings.vue';
+	import SelectTheme from './selecttheme.vue';
 	import Button from './button.vue';
 	import { getCellSize, toPx, collectionToArray, settings } from './utils.js';
 
@@ -85,6 +89,7 @@
 			InviteField,
 			SummaryField,
 			Settings,
+			SelectTheme,
 			'v-Button': Button
 		},
 
@@ -203,7 +208,8 @@
 				margin-right: 10px;
 			}
 
-			.settings {
+			.to-right {
+				display: flex;
 				margin-left: auto;
 			}
 		}
