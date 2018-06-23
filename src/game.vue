@@ -12,7 +12,7 @@
 				v-if="game.status !== 'over'"
 				:size="size"
 				:cell-size="cellSize"
-				:is-active="!game.activePlayerId || game.activePlayerId === game.opponent.id"
+				:is-active="isPlayerActive"
 				:ships="playerShips"
 				:fields="playerFields"
 				:rotate-ship="ship => game.player.battlefield.rotateShip( ship )"
@@ -31,7 +31,8 @@
 				v-if="game.opponent.isReady && game.player.isReady"
 				:size="size"
 				:cell-size="cellSize"
-				:is-active="game.activePlayerId === game.player.id"
+				:is-active="isOpponentActive"
+				:is-shoot-enabled="isShootEnabled"
 				:ships="opponentShips"
 				:fields="opponentFields"
 				:shoot="position => game.shoot( position )"/>
@@ -78,13 +79,16 @@
 			const game = this.$parent.game;
 
 			return {
+				game,
 				clientWidth: getClientWidth(),
 				playerShips: collectionToArray( game.player.battlefield.shipsCollection ),
 				playerFields: collectionToArray( game.player.battlefield ),
 				opponentShips: collectionToArray( game.opponent.battlefield.shipsCollection ),
 				opponentFields: collectionToArray( game.opponent.battlefield ),
 				size: game.player.battlefield.size,
-				game
+				isPlayerActive: true,
+				isOpponentActive: false,
+				isShootEnabled: false
 			};
 		},
 
@@ -100,6 +104,20 @@
 
 		mounted() {
 			window.addEventListener( 'resize', () => ( this.clientWidth = getClientWidth() ) );
+
+			// Observe game#activePlayer and toggle battlefield active state with a delay.
+			// This is to improve the UX.
+			const game = this.game;
+			let changeTimeout = 0;
+
+			this.game.on( 'change:activePlayerId', ( evt, name, value ) => {
+				this.isShootEnabled = false;
+				clearTimeout( changeTimeout );
+				changeTimeout = setTimeout( () => {
+					this.isPlayerActive = !value || value === game.opponent.id;
+					this.isOpponentActive = this.isShootEnabled = value === game.player.id;
+				}, 300 );
+			} );
 		},
 
 		methods: {

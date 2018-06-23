@@ -4,6 +4,10 @@
 			shoot: {
 				type: Function,
 				default: () => {}
+			},
+			isShootEnabled: {
+				type: Boolean,
+				default: false
 			}
 		},
 

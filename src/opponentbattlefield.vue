@@ -17,7 +17,7 @@
 			:size="cellSize"
 			:x="aimX"
 			:y="aimY"
-			:show="isActive && isAimVisible"
+			:show="isShootEnabled && isAimVisible"
 			:shoot="handleShoot"/>
 	</div>
 </template>

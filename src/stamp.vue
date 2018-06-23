@@ -40,6 +40,10 @@
 			width() {
 				return toPx( this.cellSize - 1 );
 			}
+		},
+
+		mounted() {
+			window.requestAnimationFrame( () => this.$el.classList.add( 'ready' ) );
 		}
 	};
 </script>
@@ -48,6 +52,12 @@
 	.marker {
 		position: absolute;
 		background: rgba(255, 0, 0, .3);
+		transform: scale( 0.3 );
+		transition: transform .2s;
+
+		&.ready {
+			transform: scale( 1 );
+		}
 
 		&.missed {
 			background: var( --battleships-stamp-missed );
