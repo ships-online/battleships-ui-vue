@@ -7,7 +7,10 @@
 				:key="theme.name"
 				:title="theme.name"
 				:class="theme.class"
-				@click="() => select( theme )">{{ theme.name }}</li>
+				@click="evt => handleClick( evt, theme )"
+			>
+				<a :href="'#' + theme.class"/>
+			</li>
 		</ul>
 	</div>
 </template>
@@ -44,6 +47,11 @@
 				theme.isActive = true;
 				document.body.classList.add( 'battleships-' + theme.bodyClass );
 				settings.set( 'theme', theme.name );
+			},
+
+			handleClick( evt, theme ) {
+				evt.preventDefault();
+				this.select( theme );
 			}
 		}
 	};
@@ -62,23 +70,28 @@
 			margin: 0 0 0 10px;
 
 			li {
-				width: 20px;
-				height: 20px;
 				margin: 0 7px 0 0;
 				padding: 0;
-				text-indent: -999999px;
-				cursor: pointer;
+
+				a {
+					display: block;
+					width: 20px;
+					height: 20px;
+				}
 
 				&.white {
-					background: #fff;
-					border: solid 2px #ddd;
+					a {
+						background: #fff;
+						border: solid 2px #ddd;
+					}
 				}
 
 				&.dark {
-					background: #000;
-					border: solid 2px #ddd;
+					a {
+						background: #000;
+						border: solid 2px #ddd;
+					}
 				}
-
 			}
 		}
 	}
