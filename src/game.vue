@@ -1,25 +1,8 @@
 <template>
 	<div>
-		<div class="menu">
-			<v-Button
-				:disabled="game.player.isReady"
-				:tooltip="game.player.isReady ? 'You have arranged your ships' : ''"
-				:tooltip-position="'toLeft'"
-				:execute="random">Randomize</v-Button>
-			<v-Button
-				:disabled="game.player.isReady || !game.player.isInGame || game.player.battlefield.isCollision"
-				:tooltip="readyButtonTooltip"
-				:execute="ready">Ready</v-Button>
-
-			<div class="to-right">
-				<SelectTheme />
-				<Settings
-					:disabled="game.status !== 'available' || game.interestedPlayersNumber > 0 || game.player.isReady"
-					:tooltip="settingsTooltip"
-					:settings="gameSettings"
-					:on-change="onSettingsChange"/>
-			</div>
-		</div>
+		<Game-menu
+			:game="game"
+			:on-settings-change="onSettingsChange"/>
 
 		<div
 			:style="{ width }"
@@ -32,8 +15,8 @@
 				:is-active="!game.activePlayerId || game.activePlayerId === game.opponent.id"
 				:ships="playerShips"
 				:fields="playerFields"
-				:rotate-ship="rotateShip"
-				:move-ship="moveShip"/>
+				:rotate-ship="ship => game.player.battlefield.rotateShip( ship )"
+				:move-ship="( ship, position ) => game.player.battlefield.moveShip( ship, position )"/>
 
 			<SummaryField
 				v-if="game.status === 'over'"
@@ -42,7 +25,7 @@
 				:player="game.player"
 				:opponent="game.opponent"
 				:is-winner="game.winnerId === game.player.id"
-				:rematch="rematch"/>
+				:rematch="() => game.requestRematch()"/>
 
 			<OpponentBattlefield
 				v-if="game.opponent.isReady && game.player.isReady"
@@ -51,7 +34,7 @@
 				:is-active="game.activePlayerId === game.player.id"
 				:ships="opponentShips"
 				:fields="opponentFields"
-				:shoot="shoot"/>
+				:shoot="position => game.shoot( position )"/>
 
 			<InviteField
 				v-if="!game.opponent.isReady || !game.player.isReady"
@@ -61,8 +44,8 @@
 				:interested-players-number="game.interestedPlayersNumber"
 				:player="game.player"
 				:opponent="game.opponent"
-				:join="join"
-				:ready="ready"/>
+				:join="() => game.accept()"
+				:ready="() => game.ready()"/>
 
 		</div>
 	</div>
@@ -73,14 +56,11 @@
 	import OpponentBattlefield from './opponentbattlefield.vue';
 	import InviteField from './invitefield.vue';
 	import SummaryField from './summaryfield.vue';
-	import Settings from './settings.vue';
-	import SelectTheme from './selecttheme.vue';
 	import Button from './button.vue';
-	import { getCellSize, toPx, collectionToArray, settings } from './utils.js';
+	import GameMenu from './gamemenu.vue';
+	import { getCellSize, toPx, collectionToArray } from './utils.js';
 
 	const MARGIN = 20;
-
-	window.settings = settings;
 
 	export default {
 		components: {
@@ -88,9 +68,8 @@
 			OpponentBattlefield,
 			InviteField,
 			SummaryField,
-			Settings,
-			SelectTheme,
-			'v-Button': Button
+			GameMenu,
+			vButton: Button
 		},
 
 		data() {
@@ -114,34 +93,6 @@
 
 			width() {
 				return toPx( ( this.cellSize * this.size ) * 2 + this.cellSize );
-			},
-
-			readyButtonTooltip() {
-				if ( this.game.player.isReady ) {
-					return 'You are ready';
-				} else if ( !this.game.player.isInGame ) {
-					return 'Join the game first';
-				} else if ( this.game.player.battlefield.isCollision ) {
-					return 'Ships configuration is invalid';
-				}
-
-				return '';
-			},
-
-			settingsTooltip() {
-				if ( this.game.status !== 'available' ) {
-					return 'Cannot change game settings<br>after the game has started';
-				} else if ( this.game.player.isReady ) {
-					return 'Cannot change game settings<br>when you are ready for the battle';
-				} else if ( this.game.interestedPlayersNumber > 0 ) {
-					return 'Cannot change game settings<br>while there are interested players';
-				}
-
-				return '';
-			},
-
-			gameSettings() {
-				return this.game.player.battlefield.settings;
 			}
 		},
 
@@ -150,34 +101,6 @@
 		},
 
 		methods: {
-			moveShip( ship, position ) {
-				this.game.player.battlefield.moveShip( ship, position );
-			},
-
-			rotateShip( ship ) {
-				this.game.player.battlefield.rotateShip( ship );
-			},
-
-			shoot( position ) {
-				this.game.shoot( position );
-			},
-
-			join() {
-				this.game.accept();
-			},
-
-			ready() {
-				this.game.ready();
-			},
-
-			random() {
-				this.game.player.battlefield.random();
-			},
-
-			rematch() {
-				this.game.requestRematch();
-			},
-
 			onSettingsChange( settings ) {
 				this.$parent.onSettingsChange( settings );
 			}
