@@ -9,16 +9,20 @@
 		<p v-else-if="error === 'opponent-left'">Your opponent has left the game.</p>
 		<p v-else>{{ error }}</p>
 
-		<v-Button :execute="newGame">Stat new game</v-Button>
+		<v-Button :execute="newGame">Start new game</v-Button>
+
+		<SelectTheme :virtual="true"/>
 	</div>
 </template>
 
 <script>
 	import Button from './button.vue';
+	import SelectTheme from './selecttheme.vue';
 
 	export default {
 		components: {
-			'v-Button': Button
+			SelectTheme,
+			vButton: Button
 		},
 
 		computed: {
@@ -35,3 +39,16 @@
 		}
 	};
 </script>
+
+<style rel="stylesheet/postcss">
+	.battleships {
+		color: var(--battleships-font-color);
+		font-family: var(--battleships-font-family);
+		font-size: var(--battleships-font-size);
+		background: var(--battleships-background-color);
+
+		&, * {
+			box-sizing: border-box;
+		}
+	}
+</style>

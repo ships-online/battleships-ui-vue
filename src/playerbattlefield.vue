@@ -2,12 +2,6 @@
 	<div
 		:style="{ width: dimension + 'px', height: dimension + 'px' }"
 		:class="[ 'field', 'battlefield', inactiveClass ]">
-		<Stamp
-			v-for="field of fields"
-			v-if="field.isMissed || field.isHit"
-			:key="field.id"
-			:model="field"
-			:cell-size="cellSize"/>
 		<Ship
 			v-for="ship of ships"
 			:key="ship.id"
@@ -15,6 +9,12 @@
 			:cell-size="cellSize"
 			@dblclick="rotate( ship )"
 			@move="pos => move( pos, ship )"/>
+		<Stamp
+			v-for="field of fields"
+			v-if="field.isMissed || field.isHit"
+			:key="field.id"
+			:model="field"
+			:cell-size="cellSize"/>
 	</div>
 </template>
 

@@ -6,7 +6,7 @@
  * @returns {number}
  */
 export function getCellSize( size, availableWidth ) {
-	return Math.min( Math.floor( availableWidth / ( ( size * 2 ) + 1 ) ), 45 );
+	return Math.min( Math.floor( availableWidth / ( ( size * 2 ) + 1 ) ), 46 );
 }
 
 /**

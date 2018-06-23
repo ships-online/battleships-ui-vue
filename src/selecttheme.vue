@@ -1,5 +1,7 @@
 <template>
-	<div class="select-theme">
+	<div
+		v-if="!virtual"
+		class="select-theme">
 		Themes:
 		<ul>
 			<li
@@ -19,6 +21,13 @@
 	import { settings } from './utils';
 
 	export default {
+		props: {
+			virtual: {
+				type: Boolean,
+				default: false
+			}
+		},
+
 		data() {
 			return {
 				themes: [

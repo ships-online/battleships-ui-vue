@@ -50,7 +50,7 @@
 		background: rgba(255, 0, 0, .3);
 
 		&.missed {
-			background: var( --battleships-stamp-missed )
+			background: var( --battleships-stamp-missed );
 		}
 
 		&.hit {
