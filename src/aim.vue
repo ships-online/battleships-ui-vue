@@ -46,7 +46,7 @@
 			},
 
 			width() {
-				return toPx( this.size );
+				return toPx( this.size - 1 );
 			}
 		}
 	};
@@ -55,7 +55,7 @@
 <style rel="stylesheet/postcss">
 	.aim {
 		position: absolute;
-		background: rgba(100, 100, 100, .2);
+		background: var( --battleships-aim-background );
 		display: none;
 
 		&.active {

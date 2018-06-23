@@ -38,7 +38,7 @@
 			},
 
 			width() {
-				return toPx( this.cellSize );
+				return toPx( this.cellSize - 1 );
 			}
 		}
 	};
@@ -50,11 +50,11 @@
 		background: rgba(255, 0, 0, .3);
 
 		&.missed {
-			background: rgba(255, 0, 0, .3);
+			background: var( --battleships-stamp-missed )
 		}
 
 		&.hit {
-			background: rgba(0, 255, 0, .3);
+			background: var( --battleships-stamp-hit );
 		}
 	}
 </style>
