@@ -68,9 +68,16 @@
 		padding: 0 1px 1px 0;
 		transition: opacity .5s;
 		background-position: -1px -1px;
+	}
 
-		&.inactive {
-			opacity: .2;
+	.status-battle {
+		.battlefield {
+			outline: 1px solid var( --battleships-field-border-color );
+
+			&.inactive {
+				opacity: var( --battleships-field-inactive-opacity );
+				outline-width: 0;
+			}
 		}
 	}
 </style>

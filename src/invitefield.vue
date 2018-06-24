@@ -33,7 +33,7 @@
 		</p>
 
 		<p v-if="player.isHost && !opponent.isInGame">
-			Number of players that entered link<br>but not joined the game yet {{ interestedPlayersNumber }}.
+			Number of players that entered the link<br>but not joined the game yet {{ interestedPlayersNumber }}.
 		</p>
 
 		<div v-if="!player.isHost && !player.isInGame">

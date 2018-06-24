@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div :class="gameStateClass">
 		<Game-menu
 			:game="game"
 			:on-settings-change="onSettingsChange"/>
@@ -99,6 +99,10 @@
 
 			width() {
 				return toPx( ( this.cellSize * this.size ) * 2 + this.cellSize );
+			},
+
+			gameStateClass() {
+				return 'status-' + this.game.status;
 			}
 		},
 
@@ -110,13 +114,13 @@
 			const game = this.game;
 			let changeTimeout = 0;
 
-			this.game.on( 'change:activePlayerId', ( evt, name, value ) => {
+			this.game.on( 'change:activePlayerId', ( evt, name, value, prevValue ) => {
 				this.isShootEnabled = false;
 				clearTimeout( changeTimeout );
 				changeTimeout = setTimeout( () => {
 					this.isPlayerActive = !value || value === game.opponent.id;
 					this.isOpponentActive = this.isShootEnabled = value === game.player.id;
-				}, 300 );
+				}, !prevValue ? 0 : 300 );
 			} );
 		},
 
