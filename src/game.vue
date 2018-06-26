@@ -42,7 +42,7 @@
 				:size="size"
 				:cell-size="cellSize"
 				:invite-url="game.inviteUrl"
-				:interested-players-number="game.interestedPlayersNumber"
+				:guests-number="game.guestsNumber"
 				:player="game.player"
 				:opponent="game.opponent"
 				:join="() => game.accept()"

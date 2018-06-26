@@ -11,7 +11,7 @@
 			:execute="() => game.ready()">Ready</v-Button>
 
 		<Settings
-			:disabled="game.status !== 'available' || game.interestedPlayersNumber > 0 || game.player.isReady"
+			:disabled="game.status !== 'available' || game.guestsNumber > 0 || game.player.isReady"
 			:tooltip="settingsTooltip"
 			:settings="game.player.battlefield.settings"
 			:on-change="onSettingsChange"/>
@@ -59,7 +59,7 @@
 					return 'Cannot change game settings<br>after the game has started';
 				} else if ( this.game.player.isReady ) {
 					return 'Cannot change game settings<br>when you are ready for the battle';
-				} else if ( this.game.interestedPlayersNumber > 0 ) {
+				} else if ( this.game.guestsNumber > 0 ) {
 					return 'Cannot change game settings<br>while there are interested players';
 				}
 

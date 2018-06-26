@@ -33,7 +33,7 @@
 		</p>
 
 		<p v-if="player.isHost && !opponent.isInGame">
-			Number of players that entered the link<br>but not joined the game yet {{ interestedPlayersNumber }}.
+			Number of players that entered the link<br>but not joined the game yet {{ guestsNumber }}.
 		</p>
 
 		<div v-if="!player.isHost && !player.isInGame">
@@ -41,8 +41,8 @@
 			<v-Button :execute="join">Join</v-Button>
 		</div>
 
-		<p v-if="!player.isHost && !player.isInGame && interestedPlayersNumber > 1">
-			Players that entered this link along with you {{ interestedPlayersNumber - 1 }}.
+		<p v-if="!player.isHost && !player.isInGame && guestsNumber > 1">
+			Players that entered this link along with you {{ guestsNumber - 1 }}.
 		</p>
 	</div>
 </template>
@@ -72,7 +72,7 @@
 				type: String,
 				default: ''
 			},
-			interestedPlayersNumber: {
+			guestsNumber: {
 				type: Number,
 				default: 0
 			},
