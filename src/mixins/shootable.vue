@@ -13,6 +13,7 @@
 
 		data() {
 			return {
+				isWaitingForResponse: false,
 				isAimVisible: false,
 				aimX: 0,
 				aimY: 0
@@ -23,7 +24,6 @@
 			let bounds;
 
 			this.$el.addEventListener( 'mouseenter', () => {
-				this.isAimVisible = true;
 				bounds = this.$el.getBoundingClientRect();
 			} );
 
@@ -32,6 +32,12 @@
 			} );
 
 			this.$el.addEventListener( 'mousemove', evt => {
+				if ( this.isWaitingForResponse ) {
+					this.isAimVisible = false;
+
+					return;
+				}
+
 				const posX = Math.floor( ( evt.clientX - bounds.left ) / this.cellSize );
 				const posY = Math.floor( ( evt.clientY - bounds.top ) / this.cellSize );
 				const x = Math.min( posX, this.size - 1 );
@@ -49,8 +55,13 @@
 
 		methods: {
 			handleShoot( position ) {
+				if ( this.isWaitingForResponse ) {
+					return;
+				}
+
 				this.isAimVisible = false;
-				this.shoot( position );
+				this.isWaitingForResponse = true;
+				this.shoot( position ).then( () => ( this.isWaitingForResponse = false ) );
 			}
 		}
 	};
