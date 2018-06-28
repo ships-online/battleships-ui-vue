@@ -46,7 +46,8 @@
 				:player="game.player"
 				:opponent="game.opponent"
 				:join="() => game.accept()"
-				:ready="() => game.ready()"/>
+				:ready="() => game.ready()"
+				:random-player="() => game.addAiOpponent()"/>
 
 		</div>
 

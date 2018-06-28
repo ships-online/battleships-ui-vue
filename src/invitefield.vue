@@ -44,6 +44,10 @@
 		<p v-if="!player.isHost && !player.isInGame && guestsNumber > 1">
 			Players that entered this link along with you {{ guestsNumber - 1 }}.
 		</p>
+
+		<p v-if="player.isHost && !opponent.isInGame" class="random-player">
+			Or play with a <v-Button :execute="randomPlayer">Random player</v-Button>
+		</p>
 	</div>
 </template>
 
@@ -76,6 +80,10 @@
 				type: Number,
 				default: 0
 			},
+			randomPlayer: {
+				type: Function,
+				default: () => {}
+			},
 			join: {
 				type: Function,
 				default: () => {}
@@ -105,3 +113,9 @@
 		}
 	};
 </script>
+
+<style rel="stylesheet/postcss">
+	.random-player {
+		margin-top: 3em;
+	}
+</style>
