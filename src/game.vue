@@ -32,10 +32,10 @@
 				:size="size"
 				:cell-size="cellSize"
 				:is-active="isOpponentActive"
-				:is-shoot-enabled="isShootEnabled"
+				:is-shot-enabled="isShotEnabled"
 				:ships="opponentShips"
 				:fields="opponentFields"
-				:shoot="position => game.shoot( position )"/>
+				:shot="position => game.shot( position )"/>
 
 			<InviteField
 				v-if="!game.opponent.isReady || !game.player.isReady"
@@ -88,7 +88,7 @@
 				size: game.player.battlefield.size,
 				isPlayerActive: true,
 				isOpponentActive: false,
-				isShootEnabled: false
+				isShotEnabled: false
 			};
 		},
 
@@ -115,11 +115,11 @@
 			let changeTimeout = 0;
 
 			this.game.on( 'change:activePlayerId', ( evt, name, value, prevValue ) => {
-				this.isShootEnabled = false;
+				this.isShotEnabled = false;
 				clearTimeout( changeTimeout );
 				changeTimeout = setTimeout( () => {
 					this.isPlayerActive = !value || value === game.opponent.id;
-					this.isOpponentActive = this.isShootEnabled = value === game.player.id;
+					this.isOpponentActive = this.isShotEnabled = value === game.player.id;
 				}, !prevValue ? 0 : 300 );
 			} );
 		},

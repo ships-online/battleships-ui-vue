@@ -17,14 +17,14 @@
 			:size="cellSize"
 			:x="aimX"
 			:y="aimY"
-			:show="isShootEnabled && isAimVisible"
-			:shoot="handleShoot"/>
+			:show="isShotEnabled && isAimVisible"
+			:shot="handleShot"/>
 	</div>
 </template>
 
 <script>
 	import Battlefield from './mixins/battlefield.vue';
-	import Shootable from './mixins/shootable.vue';
+	import Shotable from './mixins/shotable.vue';
 	import Aim from './aim.vue';
 
 	export default {
@@ -32,6 +32,6 @@
 			Aim
 		},
 
-		mixins: [ Battlefield, Shootable ]
+		mixins: [ Battlefield, Shotable ]
 	};
 </script>

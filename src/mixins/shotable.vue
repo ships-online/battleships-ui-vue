@@ -1,11 +1,11 @@
 <script>
 	export default {
 		props: {
-			shoot: {
+			shot: {
 				type: Function,
 				default: () => {}
 			},
-			isShootEnabled: {
+			isShotEnabled: {
 				type: Boolean,
 				default: false
 			}
@@ -54,14 +54,14 @@
 		},
 
 		methods: {
-			handleShoot( position ) {
+			handleShot( position ) {
 				if ( this.isWaitingForResponse ) {
 					return;
 				}
 
 				this.isAimVisible = false;
 				this.isWaitingForResponse = true;
-				this.shoot( position ).then( () => ( this.isWaitingForResponse = false ) );
+				this.shot( position ).then( () => ( this.isWaitingForResponse = false ) );
 			}
 		}
 	};

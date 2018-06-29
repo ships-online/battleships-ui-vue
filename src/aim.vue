@@ -2,7 +2,7 @@
 	<div
 		:class="[ 'aim', activeClass ]"
 		:style="{ top, left, width, height: width }"
-		@click="() => shoot( [ x, y ] )"/>
+		@click="() => shot( [ x, y ] )"/>
 </template>
 
 <script>
@@ -26,7 +26,7 @@
 				type: Boolean,
 				default: false
 			},
-			shoot: {
+			shot: {
 				type: Function,
 				default: () => {}
 			}
