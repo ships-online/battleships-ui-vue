@@ -10,6 +10,12 @@
 		<v-Button
 			:disabled="player.isWaitingForRematch"
 			:execute="rematch">{{ opponent.isWaitingForRematch ? 'Rematch' : 'Request a rematch' }}</v-Button>
+
+		<p class="new-game">
+			<v-Button
+				:disabled="player.isWaitingForRematch"
+				:execute="newGame">Start the new game</v-Button>
+		</p>
 	</div>
 </template>
 
@@ -41,7 +47,17 @@
 			rematch: {
 				type: Function,
 				default: () => {}
+			},
+			newGame: {
+				type: Function,
+				default: () => {}
 			}
-		},
+		}
 	};
 </script>
+
+<style rel="stylesheet/postcss">
+	.new-game {
+		margin-top: 2em;
+	}
+</style>

@@ -25,7 +25,8 @@
 				:player="game.player"
 				:opponent="game.opponent"
 				:is-winner="game.winnerId === game.player.id"
-				:rematch="() => game.requestRematch()"/>
+				:rematch="() => game.requestRematch()"
+				:new-game="onNewGame"/>
 
 			<OpponentBattlefield
 				v-if="game.opponent.isReady && game.player.isReady"
@@ -128,6 +129,10 @@
 		methods: {
 			onSettingsChange( settings ) {
 				this.$parent.onSettingsChange( settings );
+			},
+
+			onNewGame() {
+				this.$parent.onNewGame();
 			}
 		}
 	};
