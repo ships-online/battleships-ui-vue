@@ -45,7 +45,10 @@
 			Players that entered this link along with you {{ guestsNumber - 1 }}.
 		</p>
 
-		<p v-if="player.isHost && !opponent.isInGame" class="random-player">
+		<p
+			v-if="player.isHost && !opponent.isInGame"
+			class="random-player"
+		>
 			Or play with a <v-Button :execute="randomPlayer">Random player</v-Button>
 		</p>
 	</div>
