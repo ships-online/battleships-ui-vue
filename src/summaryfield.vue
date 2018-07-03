@@ -14,7 +14,7 @@
 		<p class="new-game">
 			<v-Button
 				:disabled="player.isWaitingForRematch"
-				:execute="newGame">Start the new game</v-Button>
+				:execute="newGame">Start new game</v-Button>
 		</p>
 	</div>
 </template>

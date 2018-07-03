@@ -66,7 +66,7 @@
 				<v-Button
 					:disabled="disabled"
 					:tooltip="tooltip"
-					:execute="reset">Reset default</v-Button>
+					:execute="reset">Reset to default</v-Button>
 
 				<v-Button
 					:disabled="disabled"
