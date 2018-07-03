@@ -118,7 +118,11 @@
 </script>
 
 <style rel="stylesheet/postcss">
-	.random-player {
-		margin-top: 3em;
+	.invite {
+		overflow: auto;
+
+		.random-player {
+			margin-top: 3em;
+		}
 	}
 </style>

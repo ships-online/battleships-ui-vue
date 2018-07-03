@@ -57,7 +57,11 @@
 </script>
 
 <style rel="stylesheet/postcss">
-	.new-game {
-		margin-top: 2em;
+	.summary {
+		overflow: auto;
+
+		.new-game {
+			margin-top: 2em;
+		}
 	}
 </style>
