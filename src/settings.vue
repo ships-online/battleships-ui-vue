@@ -66,12 +66,12 @@
 				<v-Button
 					:disabled="disabled"
 					:tooltip="tooltip"
-					:execute="reset">Reset to default</v-Button>
+					:execute="reset">Reset to defaults</v-Button>
 
 				<v-Button
 					:disabled="disabled"
 					:tooltip="tooltip"
-					:type="'submit'">Set settings</v-Button>
+					:type="'submit'">Apply new settings</v-Button>
 			</p>
 		</form>
 	</div>
